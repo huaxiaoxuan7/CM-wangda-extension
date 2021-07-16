@@ -1,0 +1,37 @@
+{
+    "name": "网大小工具",
+    "description": "",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action": {
+        "default_popup": "popup/index.html"
+    },
+    "permissions": [
+        "storage"
+    ],
+    "background": {
+        "service_worker": "background/background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://wangda.chinamobile.com/*"
+            ],
+            "js": [
+                "content-scripts/app.js",
+                "content-scripts/dom/dom.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "resources/js/video.js"
+            ],
+            "matches": [
+                "https://wangda.chinamobile.com/*"
+            ]
+        }
+    ]
+}
