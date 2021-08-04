@@ -7,10 +7,11 @@
         "default_popup": "popup/index.html"
     },
     "permissions": [
-        "storage"
+        "storage",
+        "tabs"
     ],
     "background": {
-        "service_worker": "background/background.js"
+        "service_worker": "background.js"
     },
     "content_scripts": [
         {
@@ -33,5 +34,10 @@
                 "https://wangda.chinamobile.com/*"
             ]
         }
-    ]
+    ],
+    "externally_connectable": {
+        "matches": [
+            "https://wangda.chinamobile.com/*"
+        ]
+    }
 }

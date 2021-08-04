@@ -1,19 +1,11 @@
-// ==UserScript==
-// @name         中移网大学习助手
-// @namespace    https://github.com/huaxiaoxuan7/CM-Online-University-Boost
-// @version      0.2.2
-// @description  网大视频播放停止后自动恢复播放
-// @author       Hua Xiao Xuan
-// @match        https://wangda.chinamobile.com/
-// @grant        none
-// ==/UserScript==
-
 (async () => {
   'use strict'
 
   // 工具函数
   const wait = (ms) => {
-    return new Promise(resolve => setTimeout(resolve, ms))
+    return new Promise(resolve => {
+      setTimeout(resolve, ms)
+    })
   }
 
   const getVideoDom = async () => {
@@ -26,9 +18,11 @@
   }
 
   function preventPause () {
-    videoDom.play().catch(() => (pauseCount -= 1))
-    pauseCount += 1
-    updateBanner(banner)
+    setTimeout(() => {
+      videoDom.play().catch(() => (pauseCount -= 1))
+      pauseCount += 1
+      updateBanner(banner)
+    }, 3e3)
   }
 
   const onVideoChange = async (mutationsList) => {
@@ -48,20 +42,20 @@
     const observer = new MutationObserver(onVideoChange)
     observer.observe(videoDom, { attributes: true, childList: false, subtree: false })
 
-    let { duration, currentTime } = videoDom
-    while (!duration) {
-      await wait(50)
-      duration = videoDom.duration
-    }
-    while ((duration - currentTime) > 5) {
-      await wait(1000)
-      currentTime = videoDom.currentTime
-    }
-    videoDom.removeEventListener('pause', preventPause)
-    videoDom.pause()
-    await wait(duration * 50)
-    videoDom.play()
-    videoDom.addEventListener('pause', preventPause)
+    // let { duration, currentTime } = videoDom
+    // while (!duration) {
+    //   await wait(50)
+    //   duration = videoDom.duration
+    // }
+    // while ((duration - currentTime) > 5) {
+    //   await wait(1000)
+    //   currentTime = videoDom.currentTime
+    // }
+    // videoDom.removeEventListener('pause', preventPause)
+    // videoDom.pause()
+    // await wait(duration * 50)
+    // videoDom.play()
+    // videoDom.addEventListener('pause', preventPause)
   }
 
   const createBanner = () => {
@@ -93,7 +87,6 @@
 
   // 主逻辑
   let videoDom = await getVideoDom()
-  const contentDom = document.getElementsByClassName('content')[1]
   registerEvent(videoDom)
 
   let timer = ''
