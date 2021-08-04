@@ -17,6 +17,10 @@ class Panel extends React.Component {
     chrome.storage.local.set({ panelPositionX: x, panelPositionY: y }, () => { })
   }
 
+  componentDidMount () {
+    chrome.runtime.sendMessage({ type: 'closeTab' })
+  }
+
   render () {
     return (
       <Draggable

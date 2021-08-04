@@ -28,7 +28,8 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "resources/js/video.js"
+                "resources/video.js",
+                "resources/file.js"
             ],
             "matches": [
                 "https://wangda.chinamobile.com/*"
