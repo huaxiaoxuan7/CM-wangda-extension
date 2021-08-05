@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import PanelCore from './panelCore.jsx'
+
+import Panel from './panel.jsx'
 
 const element = document.createElement('div')
 element.id = 'appAnchor'
 document.body.insertAdjacentElement('afterbegin', element)
 
 ReactDOM.render(
-     <PanelCore/>,
+     <Panel/>,
      document.getElementById('appAnchor')
 )
