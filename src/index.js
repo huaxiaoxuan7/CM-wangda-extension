@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import './app.scss'
+
 import Panel from './panel.jsx'
 
 const element = document.createElement('div')

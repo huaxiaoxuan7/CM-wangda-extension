@@ -1,8 +1,16 @@
+.affix {
+    z-index: 9999;
+    position: absolute;
+    right: 18px;
+}
+
 .panelWrapper {
     z-index: 9999;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: yellow;
     position: fixed;
+    background-color: yellow;
     cursor: pointer;
+    width: 240px;
+    max-height: 80%;
+    // font-size: 18px;
+    // font-weight: bold;
 }

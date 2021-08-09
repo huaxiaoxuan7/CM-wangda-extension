@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Draggable from 'react-draggable'
 
 import Course from './components/course/course'
@@ -7,25 +7,33 @@ import Subject from './components/subject/subject.jsx'
 
 import './panel.scss'
 
-class Panel extends Component {
+class Panel extends React.Component {
   constructor () {
     super()
-    this.defaultPositionX = 0
-    this.defaultPositionY = 0
-    chrome.storage.local.get(['panelPositionX', 'panelPositionY'], ({ panelPositionX, panelPositionY }) => {
-      this.defaultPositionX = panelPositionX
-      this.defaultPositionY = panelPositionY
-    })
     this.state = { type: '' }
   }
 
-  onPositionChange (x, y) {
-    chrome.storage.local.set({ panelPositionX: x, panelPositionY: y }, () => { })
+  // setPosition = (x, y) => {
+  //   this.setState({ positionX: x, positionY: y })
+  //   chrome.storage.sync.set({ positionX: x, positionY: y })
+  // }
+
+  onPositionChange = ({ x, y }) => {
+    if (x > 1700 || y > 890 || x < 0 || y < 0) {
+      return false
+    }
   }
 
+  // onResetPanelPosition = () => this.setPosition(0, 300)
+
   componentDidMount () {
+    // chrome.storage.sync.get(['positionX', 'positionY'], ({ positionX, positionY }) => {
+    //   this.setState({ positionX, positionY })
+    // })
     // chrome.runtime.sendMessage({ type: '0' })
-    if (document.URL.split('/')[4] === 'home') {
+    if (document.URL.split('/')[4] === '#login') {
+      this.setState({ type: 'Login' })
+    } else if (document.URL.split('/')[4] === 'home') {
       this.setState({ type: 'Home' })
     } else if (document.URL.split('/')[4] === 'study' && document.URL.split('/')[5] === 'subject') {
       this.setState({ type: 'Subject' })
@@ -36,22 +44,26 @@ class Panel extends Component {
 
   render () {
     return (
-      <Draggable
-        // position = {{ x: this.state.positionX, y: this.state.positionY }}
-        defaultPosition = {{ x: this.defaultPositionX, y: this.defaultPositionY }}
-        onStop = {({ x, y }) => this.onPositionChange(x, y)}
-        // grid={[1, 1]}
-      >
-        <div className="panelWrapper">
+      <div>
+        <Draggable
+          // position = {{ x: this.state.positionX, y: this.state.positionX }}
+          defaultPosition = {{ x: 0, y: 400 }}
+          onStop = {(x, y) => this.onPositionChange(x, y)}
+        >
           {
-            this.state.type === 'Home'
-              ? <Home/>
-              : this.state.type === 'Subject'
-                ? <Subject/>
-                : <Course/>
+          this.state.type !== 'Login' &&
+            <div className="panelWrapper">
+            {
+              this.state.type === 'Home'
+                ? <Home/>
+                : this.state.type === 'Subject'
+                  ? <Subject/>
+                  : <Course/>
+            }
+          </div>
           }
-        </div>
-      </Draggable>
+        </Draggable>
+      </div>
     )
   }
 }
