@@ -29,7 +29,8 @@
         {
             "resources": [
                 "resources/video.js",
-                "resources/file.js"
+                "resources/file.js",
+                "resources/subject.js"
             ],
             "matches": [
                 "https://wangda.chinamobile.com/*"
