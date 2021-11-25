@@ -4,7 +4,7 @@ import { Button, InputNumber } from 'antd'
 class Subject extends Component {
   constructor (props) {
     super(props)
-    this.state = { courses: 0, unfinished: 0, index: [] }
+    this.state = { courses: 0, unfinished: [], exams: [], index: [] }
   }
 
   onChangeInputNumber = (value) => {
@@ -23,8 +23,8 @@ class Subject extends Component {
     subjectScript.src = chrome.runtime.getURL('./resources/subject.js')
     document.body.appendChild(subjectScript)
     window.addEventListener('subjectList', ({ detail }) => {
-      const { courses, unfinished, index } = detail
-      this.setState({ courses, unfinished, index })
+      const { courses, unfinished, exams, index } = detail
+      this.setState({ courses, unfinished, exams, index })
     })
   }
 
@@ -32,7 +32,8 @@ class Subject extends Component {
     return (
       <div>
         <span>检测到{this.state.courses}个课程</span>
-        <span>其中{this.state.unfinished}个未完成学习</span>
+        <span>其中{this.state.unfinished.length}个未完成学习</span>
+        <span>其中{this.state.exams.length}个考试</span>
         <InputNumber
           min={1}
           max={this.state.unfinished}

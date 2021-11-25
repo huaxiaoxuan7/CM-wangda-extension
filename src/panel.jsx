@@ -27,10 +27,6 @@ class Panel extends React.Component {
   // onResetPanelPosition = () => this.setPosition(0, 300)
 
   componentDidMount () {
-    // chrome.storage.sync.get(['positionX', 'positionY'], ({ positionX, positionY }) => {
-    //   this.setState({ positionX, positionY })
-    // })
-    // chrome.runtime.sendMessage({ type: '0' })
     if (document.URL.split('/')[4] === '#login') {
       this.setState({ type: 'Login' })
     } else if (document.URL.split('/')[4] === 'home') {

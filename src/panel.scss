@@ -7,10 +7,14 @@
 .panelWrapper {
     z-index: 9999;
     position: fixed;
-    background-color: yellow;
+    background-color: #f6f6f6;
     cursor: pointer;
-    width: 240px;
+    width: 360px;
     max-height: 80%;
+    padding: 12px;
+    border-radius: 1em;
+    border-style: groove;
+    border-color: black;
     // font-size: 18px;
     // font-weight: bold;
 }
