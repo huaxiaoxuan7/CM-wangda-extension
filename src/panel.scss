@@ -1,20 +1,19 @@
 .affix {
-    z-index: 9999;
+    z-index : 9999;
     position: absolute;
-    right: 18px;
+    right   : 18px;
 }
 
-.panelWrapper {
-    z-index: 9999;
+.root {
+    z-index : 9999;
     position: fixed;
-    background-color: #f6f6f6;
-    cursor: pointer;
-    width: 360px;
-    max-height: 80%;
-    padding: 12px;
-    border-radius: 1em;
-    border-style: groove;
-    border-color: black;
-    // font-size: 18px;
-    // font-weight: bold;
+
+    cursor    : grab;
+    width     : 360px;
+    max-height: 800px;
+
+    .panelWrapper {
+        overflow-y: scroll;
+        max-height: 800px;
+    }
 }

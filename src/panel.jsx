@@ -40,7 +40,7 @@ class Panel extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="root">
         <Draggable
           // position = {{ x: this.state.positionX, y: this.state.positionX }}
           defaultPosition = {{ x: 0, y: 400 }}
