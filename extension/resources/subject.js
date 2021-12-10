@@ -10,7 +10,7 @@
   const getElements = async (className) => {
     let elements = [...document.getElementsByClassName(className)]
     while (elements.length === 0) {
-      await wait(500)
+      await wait(1000)
       elements = [...document.getElementsByClassName(className)]
     }
     return elements

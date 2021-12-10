@@ -40,15 +40,14 @@ class Panel extends React.Component {
 
   render () {
     return (
-      <div className="root">
+      <div>
         <Draggable
-          // position = {{ x: this.state.positionX, y: this.state.positionX }}
-          defaultPosition = {{ x: 0, y: 400 }}
+          defaultPosition = {{ x: 700, y: 200 }}
           onStop = {(x, y) => this.onPositionChange(x, y)}
         >
           {
           this.state.type !== 'Login' &&
-            <div className="panelWrapper">
+            <div className="draggable-root">
             {
               this.state.type === 'Home'
                 ? <Home/>

@@ -1,10 +1,4 @@
-.affix {
-    z-index : 9999;
-    position: absolute;
-    right   : 18px;
-}
-
-.root {
+.draggable-root {
     z-index : 9999;
     position: fixed;
 
@@ -12,8 +6,6 @@
     width     : 360px;
     max-height: 800px;
 
-    .panelWrapper {
-        overflow-y: scroll;
-        max-height: 800px;
-    }
+    overflow-y: scroll;
+    max-height: 800px;
 }
