@@ -1,12 +1,7 @@
 .subjectCard {
-    max-height   : 800px;
-    overflow-y   : auto;
-    border       : 1.5px dashed gray;
-    border-radius: 5px;
-
-    &:hover {
-        border: 1.5px solid gray;
-    }
+    width     : 400px;
+    max-height: 800px;
+    overflow-y: auto;
 
     .courses {
         border-bottom : 0.5px solid gray;

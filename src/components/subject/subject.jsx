@@ -51,7 +51,7 @@ class Subject extends Component {
           this.state.courses.length >= 1
             ? this.state.unFinished.map(element => (
             <div key={element.index} className="courses">
-              <Row justify="space-around" align="middle" className="rowStyle" gutt>
+              <Row justify="space-around" align="middle" className="rowStyle">
                 <Col span={18}>
                   <span className="courseType">[{element.type}]</span>
                   <span className="courseName">{element.name}</span>
@@ -75,7 +75,8 @@ class Subject extends Component {
             : '解析失败！请在页面上进入课程'
             }
         </Card>
-      </div>)
+      </div>
+    )
   }
 }
 

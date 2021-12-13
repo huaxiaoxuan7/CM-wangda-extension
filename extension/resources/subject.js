@@ -50,6 +50,5 @@
   }
 
   // detail: pass data to dom.js
-  const event = new CustomEvent('subjectList', { detail: courses })
-  window.dispatchEvent(event)
+  window.dispatchEvent(new CustomEvent('subjectList', { detail: courses }))
 })()

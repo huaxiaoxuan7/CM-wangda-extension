@@ -4,7 +4,6 @@
   // 工具函数
   const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
-
   const getVideoDom = async () => {
     let [video] = document.getElementsByTagName('video')
     while (!video || !video.src) {
@@ -19,14 +18,17 @@
       videoDom.play().catch(() => (pauseCount -= 1))
       pauseCount += 1
       updateBanner(banner)
-    }, 3e3)
+    }, 1.5e3)
+    window.dispatchEvent(new CustomEvent('preventPause'))
   }
 
   const onVideoChange = async (mutationsList) => {
     mutationsList.forEach(async item => {
       if (item.attributeName === 'src') {
-        videoDom = await getVideoDom()
         courseCount += 1
+        console.log(item.target)
+        window.dispatchEvent(new CustomEvent('videoUpdate'))
+        videoDom = await getVideoDom()
         updateBanner(banner)
         registerEvent(videoDom)
       }

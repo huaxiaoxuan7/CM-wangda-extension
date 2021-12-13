@@ -3,6 +3,12 @@
     position: fixed;
 
     cursor    : grab;
-    width     : 400px;
     max-height: 800px;
+
+    border       : 1.5px dashed gray;
+    border-radius: 5px;
+
+    &:hover {
+        border: 1.5px solid gray;
+    }
 }
