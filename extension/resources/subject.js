@@ -2,13 +2,8 @@
   'use strict'
 
   window.addEventListener('openCourse', ({ detail }) => {
-    console.log(detail)
     const { pointer } = detail
     buttons[pointer].click()
-    // console.log(buttons[pointer].attributes[3])
-    // for (const key in buttons[pointer].attributes) {
-    //   console.log(buttons[pointer].attributes[key])
-    // }
   })
 
   const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))
@@ -22,50 +17,39 @@
     return elements
   }
 
+  // 课程类型
   const contents = await getElements('content new')
-  const courses = []
-  contents.forEach((element, index) => {
-    courses.push({
-      index,
-      type: element.children[1].children[0].innerText,
-      name: element.children[1].children[1].children[0].innerText,
-      isCompulsory: element.children[0].children[1].children[0].children.length !== 2
-    })
-  })
-
+  // 课程类型
+  const types = await getElements('pull-left lib')
+  // 课程名称
+  const names = document.querySelectorAll('div.title > a.normal')
+  // 按钮名称
   const buttons = await getElements('btn small')
-  buttons.forEach((item, index) => {
-    const text = item.innerHTML
-    courses[index].startButtonText = text
-    courses[index].isInProgress = (text === '开始学习' || text === '继续学习' || text === '参加考试')
-  })
+  // 是否必修
+  const images = await getElements('normal img-cont-a')
 
-  // console.log(courses)
-  // console.log(
-  //   courses.filter(item => (!item.isInProgress && item.isCompulsory)),
-  //   courses.filter(item => (item.isInProgress && item.isCompulsory)),
-  //   courses.filter(item => (!item.isCompulsory))
-  // )
+  const courses = []
+  // 校验各属性类型是否一致🤦‍♀️🤦‍♂️🤷‍♀️🤷‍♂️
+  if (
+    contents.length === types.length &&
+    contents.length === names.length &&
+    contents.length === buttons.length &&
+    contents.length === images.length
+  ) {
+    contents.forEach((element, index) => {
+      const action = buttons[index].innerText
+      courses.push({
+        index,
+        type: types[index].innerText,
+        name: names[index].innerText,
+        action,
+        isInProgress: (action === '开始学习' || action === '继续学习' || action === '参加考试' || action === '进入知识'),
+        isCompulsory: (images[index].children.length === 1)
+      })
+    })
+  }
 
   // detail: pass data to dom.js
   const event = new CustomEvent('subjectList', { detail: courses })
   window.dispatchEvent(event)
-
-  // chrome.runtime.sendMessage({ message: 'NMSL' })
-
-  // chrome.runtime.sendMessage('cjeblmiecpnejpkmdhopgcilcgfankel', {
-  //   id: document.URL.split('/')[7],
-  //   content: JSON.stringify({
-  //     courses: buttons.length + 1,
-  //     unfinished: pointers.length + 1,
-  //     index: pointers
-  //   })
-  // }, function (response) {
-  //   console.log(response.farewell)
-  // })
-
-  // for (let index = 0; index < pointers.length; index++) {
-  //   const buttons = [...document.getElementsByClassName('btn small')]
-  //   buttons[pointers[index]].click()
-  // }
 })()

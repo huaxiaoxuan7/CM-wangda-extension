@@ -10,21 +10,25 @@
 
     .courses {
         border-bottom : 0.5px solid gray;
+        padding-top   : 2px;
         padding-bottom: 2px;
 
         .rowStyle {
+            font-size: 10px;
+
+            .courseType {
+                color: #531dab;
+            }
 
             .courseName {
                 font-size: 10px;
             }
 
             .courseStatus {
-                color    : #d9363e;
-                font-size: 10px;
+                color: #d9363e;
             }
 
             .courseButton {
-                font-size  : 10px;
                 font-weight: 1.4;
                 cursor     : pointer;
             }

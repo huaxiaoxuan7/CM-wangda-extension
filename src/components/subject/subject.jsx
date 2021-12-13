@@ -20,7 +20,7 @@ class Subject extends Component {
       this.setState({
         loading: false,
         courses,
-        unFinished: courses.filter(item => (item.isInProgress && item.isCompulsory))
+        unFinished: courses.filter(item => (item.isInProgress))
       })
     })
   }
@@ -37,22 +37,25 @@ class Subject extends Component {
               <Tag
                 color="success"
                 icon={<CheckCircleOutlined />}
-              >已完成
+              >已完成：
                 {!this.state.loading ? this.state.courses.filter(item => (!item.isInProgress)).length : '?'}
               </Tag>
               <Tag
                 color="error"
                 icon={<SyncOutlined spin />}
-              >未完成 {!this.state.loading ? this.state.unFinished.length : '?'}
+              >未完成 ：{!this.state.loading ? this.state.unFinished.length : '?'}
               </Tag>
             </div>
           }>
-          {this.state.unFinished.map(element => (
+          {
+          this.state.courses.length >= 1
+            ? this.state.unFinished.map(element => (
             <div key={element.index} className="courses">
               <Row justify="space-around" align="middle" className="rowStyle" gutt>
                 <Col span={18}>
+                  <span className="courseType">[{element.type}]</span>
                   <span className="courseName">{element.name}</span>
-                  <span className="courseStatus">{!element.isCompulsory ? '（选修）' : null}</span>
+                  <span className="courseStatus">{!element.isCompulsory ? '[选修]' : null}</span>
                 </Col>
                 <Col span={5} offset={1}>
                   <Tag
@@ -63,12 +66,14 @@ class Subject extends Component {
                       window.dispatchEvent(event)
                     }}
                   >
-                    {element.startButtonText}
+                    {element.action}
                   </Tag>
                 </Col>
               </Row>
             </div>
-          ))}
+            ))
+            : '解析失败！请在页面上进入课程'
+            }
         </Card>
       </div>)
   }

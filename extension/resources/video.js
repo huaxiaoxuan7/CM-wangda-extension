@@ -2,11 +2,8 @@
   'use strict'
 
   // 工具函数
-  const wait = (ms) => {
-    return new Promise(resolve => {
-      setTimeout(resolve, ms)
-    })
-  }
+  const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+
 
   const getVideoDom = async () => {
     let [video] = document.getElementsByTagName('video')
