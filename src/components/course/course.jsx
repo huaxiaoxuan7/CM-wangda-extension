@@ -6,6 +6,15 @@ class Course extends Component {
     this.state = { }
   }
 
+  componentDidMount () {
+    const fileScript = document.createElement('script')
+    fileScript.src = chrome.runtime.getURL('./resources/file.js')
+    document.body.appendChild(fileScript)
+    const videoScript = document.createElement('script')
+    videoScript.src = chrome.runtime.getURL('./resources/video.js')
+    document.body.appendChild(videoScript)
+  }
+
   render () {
     return (
       <div>

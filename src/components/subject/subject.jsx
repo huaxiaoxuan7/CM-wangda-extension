@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { InputNumber, Card, Tag, Tabs, Row, Col } from 'antd'
-const { TabPane } = Tabs
+import { Button, Card, Tag } from 'antd'
 
 class Subject extends Component {
   constructor (props) {
@@ -48,32 +47,21 @@ class Subject extends Component {
               <Tag color="warning">选修 {!this.state.loading ? this.state.courses.filter(item => (!item.isCompulsory)).length : '?'}</Tag>
             </div>
           }>
-            {this.state.courses.map((element) => (<p key={element.name}> {element.name}</p>))}
-          {/* <Row>
-            <Tabs defaultActiveKey="1" tabPosition="left">
-              <TabPane tab="Tab 1" key="1">
-                Content of Tab Pane 1
-              </TabPane>
-              <TabPane tab="Tab 2" key="2">
-                Content of Tab Pane 2
-              </TabPane>
-              <TabPane tab="Tab 3" key="3">
-                Content of Tab Pane 3
-              </TabPane>
-            </Tabs>
-            <Col span={8}>col-8</Col>
-            <Col span={8}>col-8</Col>
-            <Col span={8}>col-8</Col>
-          </Row> */}
-        </Card>
+          {this.state.unFinished.map((element) => (
+            <div key={element.name}>
+              <span> {element.name}</span>
+              <Button
+              type='primary'
+              size='small'
+              onClick={() => {
+                const event = new CustomEvent('openCourse', { detail: { pointer: element.index } })
+                window.dispatchEvent(event)
+              }}
+              >学习</Button>
+            </div>
 
-        <InputNumber
-          min={1}
-          max={this.state.unfinished}
-          onChange={(value) => this.onChangeInputNumber(value)} />
-        {/* <Button onClick={(e) => this.onClickOpen(e)}>
-          一键打开
-        </Button> */}
+          ))}
+        </Card>
       </div>)
   }
 }

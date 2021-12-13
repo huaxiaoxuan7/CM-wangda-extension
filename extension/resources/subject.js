@@ -3,6 +3,8 @@
 
   window.addEventListener('openCourse', ({ detail }) => {
     console.log(detail)
+    const { pointer } = detail
+    buttons[pointer].click()
   })
 
   const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))
@@ -18,8 +20,9 @@
 
   const contents = await getElements('content new')
   const courses = []
-  contents.forEach(element => {
+  contents.forEach((element, index) => {
     courses.push({
+      index,
       type: element.children[1].children[0].innerText,
       name: element.children[1].children[1].children[0].innerText,
       isCompulsory: element.children[0].children[1].children[0].children.length !== 2
