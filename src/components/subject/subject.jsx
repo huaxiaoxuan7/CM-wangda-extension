@@ -1,21 +1,13 @@
 import React, { Component } from 'react'
-import { Button, Card, Tag } from 'antd'
+import { Row, Col, Card, Tag } from 'antd'
+import { CheckCircleOutlined, SyncOutlined } from '@ant-design/icons'
+
+import './subject.scss'
 
 class Subject extends Component {
   constructor (props) {
     super(props)
     this.state = { loading: true, courses: [], unFinished: [] }
-  }
-
-  onChangeInputNumber = (value) => {
-    console.log(value)
-  }
-
-  onClickOpen = (e) => {
-    const event = new CustomEvent('openCourse', {
-      detail: { interval: 3 }
-    })
-    window.dispatchEvent(event)
   }
 
   componentDidMount () {
@@ -35,31 +27,47 @@ class Subject extends Component {
 
   render () {
     return (
-      <div>
+      <div className="subjectCard">
         <Card
           title="专题"
           size="small"
           loading={this.state.loading}
           extra={
             <div>
-              <Tag color="success">已完成 {!this.state.loading ? this.state.courses.filter(item => (!item.isInProgress && item.isCompulsory)).length : '?'}</Tag>
-              <Tag color="error">未完成 {!this.state.loading ? this.state.unFinished.length : '?'}</Tag>
-              <Tag color="warning">选修 {!this.state.loading ? this.state.courses.filter(item => (!item.isCompulsory)).length : '?'}</Tag>
+              <Tag
+                color="success"
+                icon={<CheckCircleOutlined />}
+              >已完成
+                {!this.state.loading ? this.state.courses.filter(item => (!item.isInProgress)).length : '?'}
+              </Tag>
+              <Tag
+                color="error"
+                icon={<SyncOutlined spin />}
+              >未完成 {!this.state.loading ? this.state.unFinished.length : '?'}
+              </Tag>
             </div>
           }>
-          {this.state.unFinished.map((element) => (
-            <div key={element.name}>
-              <span> {element.name}</span>
-              <Button
-              type='primary'
-              size='small'
-              onClick={() => {
-                const event = new CustomEvent('openCourse', { detail: { pointer: element.index } })
-                window.dispatchEvent(event)
-              }}
-              >学习</Button>
+          {this.state.unFinished.map(element => (
+            <div key={element.index} className="courses">
+              <Row justify="space-around" align="middle" className="rowStyle" gutt>
+                <Col span={18}>
+                  <span className="courseName">{element.name}</span>
+                  <span className="courseStatus">{!element.isCompulsory ? '（选修）' : null}</span>
+                </Col>
+                <Col span={5} offset={1}>
+                  <Tag
+                    color="#108ee9"
+                    className="courseButton"
+                    onClick={() => {
+                      const event = new CustomEvent('openCourse', { detail: { pointer: element.index } })
+                      window.dispatchEvent(event)
+                    }}
+                  >
+                    {element.startButtonText}
+                  </Tag>
+                </Col>
+              </Row>
             </div>
-
           ))}
         </Card>
       </div>)

@@ -5,6 +5,10 @@
     console.log(detail)
     const { pointer } = detail
     buttons[pointer].click()
+    // console.log(buttons[pointer].attributes[3])
+    // for (const key in buttons[pointer].attributes) {
+    //   console.log(buttons[pointer].attributes[key])
+    // }
   })
 
   const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))
@@ -31,7 +35,9 @@
 
   const buttons = await getElements('btn small')
   buttons.forEach((item, index) => {
-    courses[index].isInProgress = (item.innerHTML === '开始学习' || item.innerHTML === '继续学习' || item.innerHTML === '参加考试')
+    const text = item.innerHTML
+    courses[index].startButtonText = text
+    courses[index].isInProgress = (text === '开始学习' || text === '继续学习' || text === '参加考试')
   })
 
   // console.log(courses)
