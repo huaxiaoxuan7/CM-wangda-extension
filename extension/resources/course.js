@@ -5,15 +5,6 @@
   const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   const randomNumber = () => Math.floor(Math.random() * 100)
 
-  const getElements = async (className) => {
-    let elements = [...document.getElementsByClassName(className)]
-    while (elements.length === 0) {
-      await wait(1000)
-      elements = [...document.getElementsByClassName(className)]
-    }
-    return elements
-  }
-
   const nextCourse = (domElement) => {
     if (domElement.nextElementSibling) {
       domElement.nextElementSibling.click()
@@ -30,7 +21,6 @@
   setInterval(async () => {
     scanCounter += 1
     const focused = document.getElementsByClassName('focus')[0]
-    const tempStr = focused.innerText.split(' ')
     // 获取课程类型
     const type = document.querySelectorAll('dl.focus > dd > div.sub-text')[0].innerText
     // 获取课程状态
@@ -51,25 +41,22 @@
         if (nextCourse(focused)) {
           window.dispatchEvent(new CustomEvent('videoFinished'))
         }
-      } else {
-        const [video] = document.getElementsByTagName('video')
-        if (video.src) {
+      }
+      const [video] = document.getElementsByTagName('video')
+      if (video.src) {
         // 视频资源是之前的url吗？
-          if (video.src !== videoSrc || videoSrc === '') {
-            videoSrc = video.src
+        if (video.src !== videoSrc) {
+          videoSrc = video.src
+          if (!videoSrc) {
             window.dispatchEvent(new CustomEvent('videoFinished'))
           }
-          // 发现暂停则恢复播放
-          const [pauseFlag] = document.getElementsByClassName('vjs-play-control vjs-control vjs-button vjs-paused')
-          if (pauseFlag) {
-            await wait(400)
-            pauseFlag.click()
-            window.dispatchEvent(new CustomEvent('preventPause'))
-          // setTimeout(() => {
-          //   pauseFlag.click()
-          //   window.dispatchEvent(new CustomEvent('preventPause'))
-          // }, 400)
-          }
+        }
+        // 发现暂停则恢复播放
+        const [pauseFlag] = document.getElementsByClassName('vjs-play-control vjs-control vjs-button vjs-paused')
+        if (pauseFlag) {
+          await wait(400)
+          pauseFlag.click()
+          window.dispatchEvent(new CustomEvent('preventPause'))
         }
       }
     }
