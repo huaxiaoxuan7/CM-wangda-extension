@@ -30,7 +30,8 @@
             "resources": [
                 "resources/video.js",
                 "resources/file.js",
-                "resources/subject.js"
+                "resources/subject.js",
+                "resources/course.js"
             ],
             "matches": [
                 "https://wangda.chinamobile.com/*"

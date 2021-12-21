@@ -19,19 +19,26 @@ class Course extends Component {
         timeText: `${Math.floor(diff / 60 / 60 / 24)}天${Math.floor(diff / 60 / 60) % 24}小时${Math.floor(diff / 60) % 60}分${Math.floor(diff % 60)}秒`
       })
     }, 1000)
-    const fileScript = document.createElement('script')
-    fileScript.src = chrome.runtime.getURL('./resources/file.js')
-    document.body.appendChild(fileScript)
+    // const fileScript = document.createElement('script')
+    // fileScript.src = chrome.runtime.getURL('./resources/file.js')
+    // document.body.appendChild(fileScript)
+    // const videoScript = document.createElement('script')
+    // videoScript.src = chrome.runtime.getURL('./resources/video.js')
+    // document.body.appendChild(videoScript)
+
     const videoScript = document.createElement('script')
-    videoScript.src = chrome.runtime.getURL('./resources/video.js')
+    videoScript.src = chrome.runtime.getURL('./resources/course.js')
     document.body.appendChild(videoScript)
 
     window.addEventListener('preventPause', () => {
       this.setState({ pauseCount: this.state.pauseCount + 1 })
     })
 
-    window.addEventListener('videoUpdate', () => {
-      console.log('sdfsdfsdf')
+    window.addEventListener('fileFinished', () => {
+      this.setState({ fileCount: this.state.fileCount + 1 })
+    })
+
+    window.addEventListener('videoFinished', () => {
       this.setState({ videoCount: this.state.videoCount + 1 })
     })
   }
@@ -59,6 +66,16 @@ class Course extends Component {
 
             <Col span={8}>
               <Statistic
+                title="恢复播放"
+                value={this.state.pauseCount}
+                prefix={<RedoOutlined />}
+                valueStyle={{ fontSize: '16px' }}
+              >
+              </Statistic>
+            </Col>
+
+            <Col span={8}>
+              <Statistic
                 title="完成文档"
                 value={this.state.fileCount}
                 prefix={<FilePdfOutlined />}
@@ -67,15 +84,6 @@ class Course extends Component {
               </Statistic>
             </Col>
 
-            <Col span={8}>
-              <Statistic
-                title="恢复播放"
-                value={this.state.pauseCount}
-                prefix={<RedoOutlined />}
-                valueStyle={{ fontSize: '16px' }}
-              >
-              </Statistic>
-            </Col>
           </Row>
           <Row justify="space-around" align="middle" className="rowStyle">
             <Col span={24}>

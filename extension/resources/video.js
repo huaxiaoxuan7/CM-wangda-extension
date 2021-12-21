@@ -26,7 +26,6 @@
     mutationsList.forEach(async item => {
       if (item.attributeName === 'src') {
         courseCount += 1
-        console.log(item.target)
         window.dispatchEvent(new CustomEvent('videoUpdate'))
         videoDom = await getVideoDom()
         updateBanner(banner)
