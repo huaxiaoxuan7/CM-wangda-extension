@@ -53,7 +53,9 @@ class Panel extends React.Component {
                 ? <Home/>
                 : this.state.type === 'Subject'
                   ? <Subject/>
-                  : <Course/>
+                  : this.state.type === 'Course'
+                    ? <Course/>
+                    : null
             }
           </div>
           }

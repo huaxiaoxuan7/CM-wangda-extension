@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button } from 'antd'
+import { Button, Card, Row, Col } from 'antd'
 
 class Home extends Component {
   constructor (props) {
@@ -7,13 +7,25 @@ class Home extends Component {
     this.state = { }
   }
 
+  componentDidMount () {
+    chrome.storage.local.get(['panelPositionX', 'panelPositionY'], ({ panelPositionX, panelPositionY }) => {
+      this.defaultPositionX = panelPositionX
+      this.defaultPositionY = panelPositionY
+    })
+  }
+
   render () {
     return (
-      <div>
-        <div>nmsl</div>
-            <Button type="primary">Button</Button>
+      <div className='homeCard'>
+      <Card
+          title="主页"
+          size="small"
+          loading={this.state.loading}
+          extra={
+            <div></div>
+          }>
 
-            <h3>home</h3>
+          </Card>
       </div>
     )
   }

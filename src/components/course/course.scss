@@ -1,3 +1,11 @@
 .courseCard {
     width: 240px;
+
+    .hintText {
+        border-top : 1px dashed gray;
+        margin-top : 12px;
+        padding-top: 12px;
+        color      : saddlebrown;
+        font-size  : 16px;
+    }
 }

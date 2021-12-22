@@ -15,3 +15,5 @@ chrome.runtime.onMessageExternal.addListener(
     sendResponse({ farewell: 'goodbye' })
   }
 )
+
+// chrome.storage.local.set({ panelPositionX: x, panelPositionY: y }, () => { })
