@@ -28,8 +28,6 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "resources/video.js",
-                "resources/file.js",
                 "resources/subject.js",
                 "resources/course.js"
             ],
