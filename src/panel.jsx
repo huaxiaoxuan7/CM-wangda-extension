@@ -13,18 +13,11 @@ class Panel extends React.Component {
     this.state = { type: '' }
   }
 
-  // setPosition = (x, y) => {
-  //   this.setState({ positionX: x, positionY: y })
-  //   chrome.storage.sync.set({ positionX: x, positionY: y })
-  // }
-
   onPositionChange = ({ x, y }) => {
     if (x > 1700 || y > 890 || x < 0 || y < 0) {
       return false
     }
   }
-
-  // onResetPanelPosition = () => this.setPosition(0, 300)
 
   componentDidMount () {
     if (document.URL.split('/')[4] === '#login') {

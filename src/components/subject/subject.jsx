@@ -30,10 +30,13 @@ class Subject extends Component {
   }
 
   saveSubjectURL (subjectName) {
-    chrome.storage.sync.get(['subjectList'], res => {
+    chrome.storage.sync.get(['subjectList'], ({ subjectList }) => {
       const url = document.location.toString()
-      chrome.storage.sync.set({ subjectList: { name: subjectName, url } }, () => { })
-      chrome.storage.sync.get(['subjectList'], res => console.log(res))
+      const find = subjectList.find(element => element.name === subjectName)
+      if (!find) {
+        subjectList.push({ name: subjectName, url })
+        chrome.storage.sync.set({ subjectList }, () => { })
+      }
     })
   }
 

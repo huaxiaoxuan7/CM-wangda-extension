@@ -12,7 +12,6 @@ class Course extends Component {
 
   componentDidMount () {
     const startTime = Date.now()
-
     setInterval(() => {
       const diff = (Date.now() - startTime) / 1e3
       this.setState({
