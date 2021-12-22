@@ -58,16 +58,15 @@ class Home extends Component {
                       color="#f50"
                       className="subjectButton"
                       onClick={() => {
-                        const subjectList = this.state.subjectList.filter(item => {
-                          return item.name !== element.name
-                        })
+                        const subjectList = this.state.subjectList.filter(item =>
+                          item.name !== element.name
+                        )
                         this.setState({ subjectList })
                         chrome.storage.sync.set({ subjectList })
                       }}
                     >
                       删除
                     </Tag>
-
                   </Col>
                 </Row>
               </div>

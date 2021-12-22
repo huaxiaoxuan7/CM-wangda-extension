@@ -55,10 +55,9 @@
       if (media.src) {
         // 视频资源是之前的url吗？
         if (media.src !== videoSrc) {
+          // 不是，则记录该视频地址
           videoSrc = media.src
-          if (!videoSrc) {
-            window.dispatchEvent(new CustomEvent('videoFinished'))
-          }
+          media.muted = true
         }
         // 发现暂停则恢复播放
         const [pauseFlag] = document.getElementsByClassName('vjs-play-control vjs-control vjs-button vjs-paused')
