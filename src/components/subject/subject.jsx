@@ -23,6 +23,18 @@ class Subject extends Component {
         unFinished: courses.filter(item => (item.isInProgress))
       })
     })
+
+    window.addEventListener('subjectName', ({ detail: subjectName }) => {
+      this.saveSubjectURL(subjectName)
+    })
+  }
+
+  saveSubjectURL (subjectName) {
+    chrome.storage.sync.get(['subjectList'], res => {
+      const url = document.location.toString()
+      chrome.storage.sync.set({ subjectList: { name: subjectName, url } }, () => { })
+      chrome.storage.sync.get(['subjectList'], res => console.log(res))
+    })
   }
 
   render () {

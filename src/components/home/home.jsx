@@ -8,10 +8,7 @@ class Home extends Component {
   }
 
   componentDidMount () {
-    chrome.storage.local.get(['panelPositionX', 'panelPositionY'], ({ panelPositionX, panelPositionY }) => {
-      this.defaultPositionX = panelPositionX
-      this.defaultPositionY = panelPositionY
-    })
+    chrome.storage.sync.get(['subjectList'], res => console.log(res))
   }
 
   render () {
