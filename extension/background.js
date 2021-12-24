@@ -1,23 +1,20 @@
 chrome.runtime.onInstalled.addListener((reason) => {
-  chrome.storage.sync.set({ subjectList: [] }, () => { })
+  chrome.storage.sync.set({
+    subjectList: [],
+    settings: [
+      { courseEnhanced: true },
+      { autoMute: true },
+      { autoCloseTab: false },
+      { homePanel: true },
+      { subjectPanel: true },
+      { coursePanel: true }
+    ]
+  }, () => { })
   chrome.tabs.create({
     url: 'welcome.html'
   })
 })
 
-chrome.runtime.onMessage.addListener(
-  function (request, sender, sendResponse) {
-    console.log(request, sender)
-    sendResponse({ farewell: 'goodbye' })
-  }
-)
-
-chrome.runtime.onMessageExternal.addListener(
-  function (request, sender, sendResponse) {
-    console.log(request, sender)
-    sendResponse({ farewell: 'goodbye' })
-  }
-)
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log('Request comes from content script ' + sender.tab.id)
   const { action } = JSON.parse(request.greeting)
@@ -28,5 +25,3 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     chrome.tabs.create({ url })
   }
 })
-
-// chrome.storage.local.set({ panelPositionX: x, panelPositionY: y }, () => { })
