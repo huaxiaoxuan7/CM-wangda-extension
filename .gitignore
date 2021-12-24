@@ -1,3 +1,4 @@
 node_modules
 package-lock.json
 extension/popup/bootstrap.min.css.map
+assets
