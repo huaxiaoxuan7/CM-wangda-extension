@@ -18,10 +18,6 @@ class Home extends Component {
   }
 
   componentDidMount () {
-    const homeScript = document.createElement('script')
-    homeScript.src = chrome.runtime.getURL('./resources/home.js')
-    document.body.appendChild(homeScript)
-
     chrome.storage.sync.get(['subjectList'], ({ subjectList }) => {
       this.setState({ subjectList, loading: false })
     })
@@ -82,7 +78,7 @@ class Home extends Component {
                       </Row>
                     </div>
                   ))
-                  : '没有近期学习的专题了！😏'
+                  : <div className='hintText'><span>近期学习专题列表为空！</span><span>😪</span></div>
               }
             </Card>
           </div>

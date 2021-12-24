@@ -1,6 +1,6 @@
 {
-    "name": "网大小工具",
-    "description": "",
+    "name": "网大学习增强",
+    "description": "提高学习效率！",
     "version": "1.0",
     "manifest_version": 3,
     "action": {
@@ -27,13 +27,12 @@
     ],
     "web_accessible_resources": [
         {
-            "resources": [
-                "resources/subject.js",
-                "resources/course.js",
-                "resources/home.js"
-            ],
             "matches": [
                 "https://wangda.chinamobile.com/*"
+            ],
+            "resources": [
+                "resources/subject.js",
+                "resources/course.js"
             ]
         }
     ],

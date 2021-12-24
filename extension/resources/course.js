@@ -1,24 +1,35 @@
 (async () => {
   'use strict'
 
+  // 注册设置
+  let courseEnhanced = true
+  let autoMuted = true
+  window.addEventListener('settingsLoaded', ({ detail }) => {
+    courseEnhanced = detail.courseEnhanced
+    autoMuted = detail.autoMuted
+    console.log(courseEnhanced, autoMuted)
+  })
+
   // 工具函数
   const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   const randomNumber = () => Math.floor(Math.random() * 100)
 
   const nextCourse = (domElement) => {
-    if (domElement.nextElementSibling) {
-      domElement.nextElementSibling.click()
-      return true
-    } else {
-      const nextCourse = domElement.parentNode.parentNode.nextElementSibling
-      if (nextCourse) {
-        nextCourse.querySelector('dl.required').click()
+    if (courseEnhanced) {
+      if (domElement.nextElementSibling) {
+        domElement.nextElementSibling.click()
         return true
       } else {
-        window.dispatchEvent(new CustomEvent('allFinished'))
+        const nextCourse = domElement.parentNode.parentNode.nextElementSibling
+        if (nextCourse) {
+          nextCourse.querySelector('dl.required').click()
+          return true
+        } else {
+          window.dispatchEvent(new CustomEvent('allFinished'))
+        }
+        return false
       }
-      return false
-    }
+    } return true
   }
 
   let scanCounter = 0
@@ -41,9 +52,11 @@
         scanCounter = 0
       }
       // 未完成时持续翻页
-      const [pdfViewer] = document.getElementsByClassName('fullScreen-content')
-      if (pdfViewer) {
-        pdfViewer.scrollBy(0, 50 + randomNumber())
+      if (courseEnhanced) {
+        const [pdfViewer] = document.getElementsByClassName('fullScreen-content')
+        if (pdfViewer) {
+          pdfViewer.scrollBy(0, 50 + randomNumber())
+        }
       }
     } else if (type === '视频' || type === '音频') {
       let media = {}
@@ -57,14 +70,18 @@
         if (media.src !== videoSrc) {
           // 不是，则记录该视频地址
           videoSrc = media.src
-          media.muted = true
+          if (autoMuted) {
+            media.muted = true
+          }
         }
         // 发现暂停则恢复播放
-        const [pauseFlag] = document.getElementsByClassName('vjs-play-control vjs-control vjs-button vjs-paused')
-        if (pauseFlag) {
-          await wait(400)
-          pauseFlag.click()
-          window.dispatchEvent(new CustomEvent('preventPause'))
+        if (courseEnhanced) {
+          const [pauseFlag] = document.getElementsByClassName('vjs-play-control vjs-control vjs-button vjs-paused')
+          if (pauseFlag) {
+            await wait(400)
+            pauseFlag.click()
+            window.dispatchEvent(new CustomEvent('preventPause'))
+          }
         }
       }
       if (status === '已完成') {

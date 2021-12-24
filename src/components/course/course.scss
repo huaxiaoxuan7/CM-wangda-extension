@@ -5,7 +5,14 @@
         border-top : 1px dashed gray;
         margin-top : 12px;
         padding-top: 12px;
-        color      : saddlebrown;
-        font-size  : 16px;
+
+        span:first-child {
+            font-size  : 16px;
+            font-weight: bold;
+        }
+
+        span:nth-child(2) {
+            font-size: 24px;
+        }
     }
 }

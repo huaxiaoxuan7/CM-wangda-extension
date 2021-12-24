@@ -6,7 +6,8 @@ import './course.scss'
 
 class Course extends Component {
   static propTypes = {
-    enable: Boolean
+    enable: Boolean,
+    settings: Array
   }
 
   constructor (props) {
@@ -19,7 +20,10 @@ class Course extends Component {
       fileCount: 0,
       pauseCount: 0,
       finishFlag: false,
-      showPanel: this.props.enable
+      showPanel: this.props.enable,
+      courseEnhanced: this.props.settings[0].value,
+      autoMuted: this.props.settings[1].value,
+      autoClose: this.props.settings[2].value
     }
   }
 
@@ -50,7 +54,23 @@ class Course extends Component {
 
     window.addEventListener('allFinished', () => {
       this.setState({ finishFlag: true })
+      if (this.state.autoClose) {
+        chrome.runtime.sendMessage({
+          greeting: JSON.stringify({
+            action: 'close_tab'
+          })
+        })
+      }
     })
+
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('settingsLoaded', {
+        detail: {
+          courseEnhanced: this.state.courseEnhanced,
+          autoMuted: this.state.autoMuted
+        }
+      }))
+    }, 1000)
   }
 
   render () {
@@ -60,7 +80,7 @@ class Course extends Component {
           this.state.showPanel &&
           <div className="courseCard">
             <Card
-              title="课程"
+              title={`课程[${this.state.courseEnhanced ? '助力中' : '未助力'}]`}
               size="small"
               loading={this.state.loading}
               extra={
@@ -121,7 +141,7 @@ class Course extends Component {
               >
               </Statistic>
               {this.state.finishFlag
-                ? <div className='hintText'> {'已完成当前页面所有课程，可以关闭本页面✌️😁👌'}</div>
+                ? <div className='hintText'><span>已完成当前页面所有课程，可以关闭本页面！</span><span>✌️😏👌</span></div>
                 : null}
             </Card>
           </div>

@@ -17,4 +17,18 @@
       cursor     : pointer;
     }
   }
+
+  .hintText {
+    text-align    : center;
+    vertical-align: middle;
+
+    span:first-child {
+      font-size  : 16px;
+      font-weight: bold;
+    }
+
+    span:nth-child(2) {
+      font-size: 24px;
+    }
+  }
 }

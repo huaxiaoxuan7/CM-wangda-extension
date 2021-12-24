@@ -23,6 +23,8 @@ class Panel extends React.Component {
     chrome.storage.sync.get(['settings'], ({ settings }) => {
       this.setState({ settings: settings })
     })
+
+    // 有更好的办法监测地址栏变化吗?😪
     if (document.URL.split('/')[4] === '#login') {
       this.setState({ type: 'Login' })
     } else if (document.URL.split('/')[4] === 'home') {
@@ -53,7 +55,10 @@ class Panel extends React.Component {
                      <Subject enable={this.state.settings[4].value}/>}</div>
                   : this.state.type === 'Course'
                     ? <div>{this.state.settings.length > 0 &&
-                       <Course enable={this.state.settings[5].value}/>}</div>
+                       <Course
+                       enable={this.state.settings[5].value}
+                       settings={this.state.settings.slice(0, 3)}
+                       />}</div>
                     : null
             }
           </div>

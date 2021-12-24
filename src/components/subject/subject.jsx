@@ -36,6 +36,10 @@ class Subject extends Component {
     window.addEventListener('subjectName', ({ detail: subjectName }) => {
       this.saveSubjectURL(subjectName)
     })
+
+    setTimeout(() => {
+      this.setState({ loading: false })
+    }, 5000)
   }
 
   saveSubjectURL (subjectName) {
@@ -100,8 +104,8 @@ class Subject extends Component {
                         </Row>
                       </div>
                     ))
-                    : '已完成全部课程学习！✌️😁👌'
-                  : '解析失败，请在页面上进入课程！🤷‍♀️🤷‍♂️'
+                    : <div className='hintText'><span>已完成当前专题下全部课程学习!</span><span>✌️😁👌</span></div>
+                  : <div className='hintText'><span>解析失败，请在页面上手动进入课程！</span><span>😥🥲</span></div>
               }
             </Card>
           </div>
