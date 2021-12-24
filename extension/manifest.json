@@ -1,7 +1,7 @@
 {
-    "name": "网大学习增强",
-    "description": "提高学习效率！",
-    "version": "1.0",
+    "name": "网大功能增强",
+    "description": "轻松完成中移网大学习任务！",
+    "version": "0.9.0",
     "manifest_version": 3,
     "action": {
         "default_popup": "popup/index.html"

@@ -62,7 +62,7 @@ class Home extends Component {
                         </Col>
                         <Col span={3}>
                           <Tag
-                            color="#f50"
+                            color="#C3272B"
                             className="subjectButton"
                             onClick={() => {
                               const subjectList = this.state.subjectList.filter(item =>
