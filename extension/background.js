@@ -2,12 +2,12 @@ chrome.runtime.onInstalled.addListener((reason) => {
   chrome.storage.sync.set({
     subjectList: [],
     settings: [
-      { courseEnhanced: true },
-      { autoMute: true },
-      { autoCloseTab: false },
-      { homePanel: true },
-      { subjectPanel: true },
-      { coursePanel: true }
+      { name: 'courseEnhanced', value: true },
+      { name: 'autoMute', value: true },
+      { name: 'autoCloseTab', value: false },
+      { name: 'homePanel', value: true },
+      { name: 'subjectPanel', value: true },
+      { name: 'coursePanel', value: true }
     ]
   }, () => { })
   chrome.tabs.create({

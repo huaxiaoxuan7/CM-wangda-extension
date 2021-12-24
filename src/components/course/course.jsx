@@ -5,9 +5,22 @@ import { FieldTimeOutlined, VideoCameraOutlined, FilePdfOutlined, RedoOutlined, 
 import './course.scss'
 
 class Course extends Component {
+  static propTypes = {
+    enable: Boolean
+  }
+
   constructor (props) {
     super(props)
-    this.state = { loading: false, diff: 0, timeText: '', videoCount: 0, fileCount: 0, pauseCount: 0, finishFlag: false }
+    this.state = {
+      loading: false,
+      diff: 0,
+      timeText: '',
+      videoCount: 0,
+      fileCount: 0,
+      pauseCount: 0,
+      finishFlag: false,
+      showPanel: this.props.enable
+    }
   }
 
   componentDidMount () {
@@ -42,73 +55,79 @@ class Course extends Component {
 
   render () {
     return (
-      <div className="courseCard">
-        <Card
-          title="课程"
-          size="small"
-          loading={this.state.loading}
-          extra={
-            <div>
+      <div>
+        {
+          this.state.showPanel &&
+          <div className="courseCard">
+            <Card
+              title="课程"
+              size="small"
+              loading={this.state.loading}
+              extra={
+                <div>
+                  {this.state.finishFlag
+                    ? <Tag
+                      color="success"
+                      icon={<CheckCircleOutlined />}
+                    >已完成</Tag>
+                    : <Tag
+                      color="error"
+                      icon={<SyncOutlined spin />}
+                    >未完成</Tag>
+                  }
+                </div>
+              }>
+              <Row justify="space-around" align="middle" className="rowStyle">
+                <Col span={8}>
+                  <Statistic
+                    title="完成视频"
+                    value={this.state.videoCount}
+                    prefix={<VideoCameraOutlined />}
+                    valueStyle={{ fontSize: '16px' }}
+                  >
+                  </Statistic>
+                </Col>
+
+                <Col span={8}>
+                  <Statistic
+                    title="恢复播放"
+                    value={this.state.pauseCount}
+                    prefix={<RedoOutlined />}
+                    valueStyle={{ fontSize: '16px' }}
+                  >
+                  </Statistic>
+                </Col>
+
+                <Col span={8}>
+                  <Statistic
+                    title="完成文档"
+                    value={this.state.fileCount}
+                    prefix={<FilePdfOutlined />}
+                    valueStyle={{ fontSize: '16px' }}
+                  >
+                  </Statistic>
+                </Col>
+
+              </Row>
+              <Row justify="space-around" align="middle" className="rowStyle">
+                <Col span={24}>
+                </Col>
+              </Row>
+              <Statistic
+                title="本次已学习"
+                value={this.state.timeText}
+                prefix={<FieldTimeOutlined />}
+                valueStyle={{ fontSize: '16px' }}
+              >
+              </Statistic>
               {this.state.finishFlag
-                ? <Tag
-                  color="success"
-                  icon={<CheckCircleOutlined />}
-                >已完成</Tag>
-                : <Tag
-                  color="error"
-                  icon={<SyncOutlined spin />}
-                >未完成</Tag>
-              }
-            </div>
-          }>
-          <Row justify="space-around" align="middle" className="rowStyle">
-            <Col span={8}>
-              <Statistic
-                title="完成视频"
-                value={this.state.videoCount}
-                prefix={<VideoCameraOutlined />}
-                valueStyle={{ fontSize: '16px' }}
-              >
-              </Statistic>
-            </Col>
-
-            <Col span={8}>
-              <Statistic
-                title="恢复播放"
-                value={this.state.pauseCount}
-                prefix={<RedoOutlined />}
-                valueStyle={{ fontSize: '16px' }}
-              >
-              </Statistic>
-            </Col>
-
-            <Col span={8}>
-              <Statistic
-                title="完成文档"
-                value={this.state.fileCount}
-                prefix={<FilePdfOutlined />}
-                valueStyle={{ fontSize: '16px' }}
-              >
-              </Statistic>
-            </Col>
-
-          </Row>
-          <Row justify="space-around" align="middle" className="rowStyle">
-            <Col span={24}>
-            </Col>
-          </Row>
-          <Statistic
-            title="本次已学习"
-            value={this.state.timeText}
-            prefix={<FieldTimeOutlined />}
-            valueStyle={{ fontSize: '16px' }}
-          >
-          </Statistic>
-          {this.state.finishFlag
-            ? <div className='hintText'> {'已完成当前页面所有课程，可以关闭本页面✌️😁👌'}</div>
-            : null}
-        </Card>
-      </div>)
+                ? <div className='hintText'> {'已完成当前页面所有课程，可以关闭本页面✌️😁👌'}</div>
+                : null}
+            </Card>
+          </div>
+        }
+      </div>
+    )
   }
 }
 

@@ -10,7 +10,7 @@ import './panel.scss'
 class Panel extends React.Component {
   constructor () {
     super()
-    this.state = { type: '' }
+    this.state = { type: '', settings: [] }
   }
 
   onPositionChange = ({ x, y }) => {
@@ -20,6 +20,9 @@ class Panel extends React.Component {
   }
 
   componentDidMount () {
+    chrome.storage.sync.get(['settings'], ({ settings }) => {
+      this.setState({ settings: settings })
+    })
     if (document.URL.split('/')[4] === '#login') {
       this.setState({ type: 'Login' })
     } else if (document.URL.split('/')[4] === 'home') {
@@ -43,11 +46,14 @@ class Panel extends React.Component {
             <div className="draggable-root">
             {
               this.state.type === 'Home'
-                ? <Home/>
+                ? <div>{this.state.settings.length > 0 &&
+                   <Home enable={this.state.settings[3].value}/>}</div>
                 : this.state.type === 'Subject'
-                  ? <Subject/>
+                  ? <div>{this.state.settings.length > 0 &&
+                     <Subject enable={this.state.settings[4].value}/>}</div>
                   : this.state.type === 'Course'
-                    ? <Course/>
+                    ? <div>{this.state.settings.length > 0 &&
+                       <Course enable={this.state.settings[5].value}/>}</div>
                     : null
             }
           </div>
