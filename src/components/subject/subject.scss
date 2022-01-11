@@ -1,31 +1,39 @@
 .subjectCard {
     width     : 400px;
     max-height: 800px;
-    overflow-y: auto;
 
-    .courses {
-        border-bottom : 0.5px solid gray;
-        padding-top   : 2px;
-        padding-bottom: 2px;
+    .cardTitle {
+        font-size  : 16px;
+        font-weight: bold;
+    }
 
-        .rowStyle {
-            font-size: 10px;
+    .cardBody {
 
-            .courseType {
-                color: #531dab;
-            }
+        .courses {
 
-            .courseName {
-                font-size: 10px;
-            }
+            .rowStyle {
+                padding      : 4px 0px;
+                border-bottom: 0.5px solid gray;
+                margin-right : 12px;
+                font-size    : 10px;
 
-            .courseStatus {
-                color: #d9363e;
-            }
+                .courseType {
+                    color: #531dab;
+                }
 
-            .courseButton {
-                font-weight: 1.4;
-                cursor     : pointer;
+                .courseName {
+                    font-size: 10px;
+                }
+
+                .courseStatus {
+                    color: #d9363e;
+                }
+
+                .courseButton {
+                    margin-left: -3px;
+                    font-weight: 1.4;
+                    cursor     : pointer;
+                }
             }
         }
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Tag } from 'antd'
 import { CheckCircleOutlined, SyncOutlined } from '@ant-design/icons'
+import { Scrollbars } from 'react-custom-scrollbars-2'
 
 import './subject.scss'
 
@@ -60,9 +61,10 @@ class Subject extends Component {
           this.state.showPanel &&
           <div className="subjectCard">
             <Card
-              title="专题"
+              title={<span className="cardTitle">专题</span>}
               size="small"
               loading={this.state.loading}
+              bodyStyle={{ padding: '6px 0px 6px 12px' }}
               extra={
                 <div>
                   <Tag
@@ -78,35 +80,44 @@ class Subject extends Component {
                   </Tag>
                 </div>
               }>
-              {
-                this.state.courses.length >= 1
-                  ? this.state.unFinished.length >= 1
-                    ? this.state.unFinished.map(element => (
-                      <div key={element.index} className="courses">
-                        <Row justify="space-around" align="middle" className="rowStyle">
-                          <Col span={18}>
-                            <span className="courseType">[{element.type}]</span>
-                            <span className="courseName">{element.name}</span>
-                            <span className="courseStatus">{!element.isCompulsory ? '[选修]' : null}</span>
-                          </Col>
-                          <Col span={5} offset={1}>
-                            <Tag
-                              color="#108ee9"
-                              className="courseButton"
-                              onClick={() => {
-                                const event = new CustomEvent('openCourse', { detail: { pointer: element.index } })
-                                window.dispatchEvent(event)
-                              }}
-                            >
-                              {element.action}
-                            </Tag>
-                          </Col>
-                        </Row>
-                      </div>
-                    ))
-                    : <div className='hintText'><span>已完成当前专题下全部课程学习!</span><span>✌️😁👌</span></div>
-                  : <div className='hintText'><span>解析失败，请在页面上手动进入课程！</span><span>😥🥲</span></div>
-              }
+              <div className='cardBody'>
+                <Scrollbars
+                  autoHeight
+                  autoHeightMin={10}
+                  autoHeightMax={700}
+                  width={385}>
+                  {
+                    this.state.courses.length >= 1
+                      ? this.state.unFinished.length >= 1
+                        ? this.state.unFinished.map(element => (
+                          <div key={element.index} className="courses">
+
+                            <Row justify="space-around" align="middle" className="rowStyle">
+                              <Col span={19}>
+                                <span className="courseType">[{element.type}]</span>
+                                <span className="courseName">{element.name}</span>
+                                <span className="courseStatus">{!element.isCompulsory ? '[选修]' : null}</span>
+                              </Col>
+                              <Col span={4} offset={1}>
+                                <Tag
+                                  color="#108ee9"
+                                  className="courseButton"
+                                  onClick={() => {
+                                    const event = new CustomEvent('openCourse', { detail: { pointer: element.index } })
+                                    window.dispatchEvent(event)
+                                  }}
+                                >
+                                  {element.action}
+                                </Tag>
+                              </Col>
+                            </Row>
+                          </div>
+                        ))
+                        : <div className='hintText'><span>已完成当前专题下全部课程学习!</span><span>✌️😁👌</span></div>
+                      : <div className='hintText'><span>解析失败，请在页面上手动进入课程！</span><span>😥🥲</span></div>
+                  }
+                </Scrollbars>
+              </div>
             </Card>
           </div>
         }
