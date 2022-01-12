@@ -80,7 +80,7 @@ class Course extends Component {
           this.state.showPanel &&
           <div className="courseCard">
             <Card
-              title={`课程[${this.state.courseEnhanced ? '助力中' : '未助力'}]`}
+              title={<span className="cardTitle">{`课程[${this.state.courseEnhanced ? '助力中' : '未助力'}]`}</span>}
               size="small"
               loading={this.state.loading}
               extra={

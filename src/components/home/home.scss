@@ -1,34 +1,46 @@
 .homeCard {
   width     : 400px;
   max-height: 800px;
-  overflow-y: auto;
 
-  .subjects {
-    border-bottom : 0.5px solid gray;
-    padding-top   : 2px;
-    padding-bottom: 2px;
-
-    .subjectName {
-      font-size: 10px;
-    }
-
-    .subjectButton {
-      font-weight: 1.4;
-      cursor     : pointer;
-    }
+  .cardTitle {
+    font-size  : 16px;
+    font-weight: bold;
   }
 
-  .hintText {
-    text-align    : center;
-    vertical-align: middle;
+  .cardBody {
 
-    span:first-child {
-      font-size  : 16px;
-      font-weight: bold;
+
+    .subjects {
+
+      .rowStyle {
+        padding      : 4px 0px;
+        border-bottom: 0.5px solid gray;
+        margin-right : 12px;
+        font-size    : 10px;
+
+        .subjectName {
+          font-size: 10px;
+        }
+
+        .subjectButton {
+          font-weight: 1.4;
+          cursor     : pointer;
+        }
+      }
     }
 
-    span:nth-child(2) {
-      font-size: 24px;
+    .hintText {
+      text-align    : center;
+      vertical-align: middle;
+
+      span:first-child {
+        font-size  : 16px;
+        font-weight: bold;
+      }
+
+      span:nth-child(2) {
+        font-size: 24px;
+      }
     }
   }
 }

@@ -1,6 +1,11 @@
 .courseCard {
     width: 240px;
 
+    .cardTitle {
+        font-size  : 16px;
+        font-weight: bold;
+    }
+
     .hintText {
         border-top : 1px dashed gray;
         margin-top : 12px;

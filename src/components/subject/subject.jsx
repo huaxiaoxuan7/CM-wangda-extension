@@ -91,7 +91,6 @@ class Subject extends Component {
                       ? this.state.unFinished.length >= 1
                         ? this.state.unFinished.map(element => (
                           <div key={element.index} className="courses">
-
                             <Row justify="space-around" align="middle" className="rowStyle">
                               <Col span={19}>
                                 <span className="courseType">[{element.type}]</span>

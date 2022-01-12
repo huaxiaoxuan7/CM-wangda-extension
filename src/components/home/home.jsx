@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Row, Col, Tag } from 'antd'
+import { Scrollbars } from 'react-custom-scrollbars-2'
 
 import './home.scss'
 
@@ -30,56 +31,64 @@ class Home extends Component {
           this.state.showPanel &&
           <div className='homeCard'>
             <Card
-              title="最近学习的专题"
+              title={<span className="cardTitle">最近学习的专题</span>}
               size="small"
               loading={this.state.loading}
               extra={
                 <div></div>
               }>
-              {
-                this.state.subjectList.length > 0
-                  ? this.state.subjectList.map((element, index) => (
-                    <div key={element.index} className="subjects">
-                      <Row justify="space-around" align="middle" className="rowStyle">
-                        <Col span={17}>
-                          <span className="subjectName">{element.name}</span>
-                        </Col>
-                        <Col span={3} offset={1}>
-                          <Tag
-                            color="#108ee9"
-                            className="subjectButton"
-                            onClick={() => {
-                              chrome.runtime.sendMessage({
-                                greeting: JSON.stringify({
-                                  action: 'open_tab',
-                                  url: element.url
-                                })
-                              })
-                            }}
-                          >
-                            打开
-                          </Tag>
-                        </Col>
-                        <Col span={3}>
-                          <Tag
-                            color="#C3272B"
-                            className="subjectButton"
-                            onClick={() => {
-                              const subjectList = this.state.subjectList.filter(item =>
-                                item.name !== element.name
-                              )
-                              this.setState({ subjectList })
-                              chrome.storage.sync.set({ subjectList })
-                            }}
-                          >
-                            删除
-                          </Tag>
-                        </Col>
-                      </Row>
-                    </div>
-                  ))
-                  : <div className='hintText'><span>近期学习专题列表为空！</span><span>😪</span></div>
-              }
+              <div className='cardBody'>
+                <Scrollbars
+                  autoHeight
+                  autoHeightMin={10}
+                  autoHeightMax={700}
+                  width={385}>
+                  {
+                    this.state.subjectList.length > 0
+                      ? this.state.subjectList.map((element, index) => (
+                        <div key={element.index} className="subjects">
+                          <Row justify="space-around" align="middle" className="rowStyle">
+                            <Col span={17}>
+                              <span className="subjectName">{element.name}</span>
+                            </Col>
+                            <Col span={3} offset={1}>
+                              <Tag
+                                color="#108ee9"
+                                className="subjectButton"
+                                onClick={() => {
+                                  chrome.runtime.sendMessage({
+                                    greeting: JSON.stringify({
+                                      action: 'open_tab',
+                                      url: element.url
+                                    })
+                                  })
+                                }}
+                              >
+                                打开
+                              </Tag>
+                            </Col>
+                            <Col span={3}>
+                              <Tag
+                                color="#C3272B"
+                                className="subjectButton"
+                                onClick={() => {
+                                  const subjectList = this.state.subjectList.filter(item =>
+                                    item.name !== element.name
+                                  )
+                                  this.setState({ subjectList })
+                                  chrome.storage.sync.set({ subjectList })
+                                }}
+                              >
+                                删除
+                              </Tag>
+                            </Col>
+                          </Row>
+                        </div>
+                      ))
+                      : <div className='hintText'><span>近期学习专题列表为空！</span><span>😪</span></div>
+                  }
+                </Scrollbars>
+              </div>
             </Card>
           </div>
         }
