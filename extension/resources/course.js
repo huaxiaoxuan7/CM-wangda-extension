@@ -7,7 +7,6 @@
   window.addEventListener('settingsLoaded', ({ detail }) => {
     courseEnhanced = detail.courseEnhanced
     autoMuted = detail.autoMuted
-    console.log(courseEnhanced, autoMuted)
   })
 
   // 工具函数

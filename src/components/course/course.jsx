@@ -75,7 +75,7 @@ class Course extends Component {
 
   render () {
     return (
-      <div>
+      <>
         {
           this.state.showPanel &&
           <div className="courseCard">
@@ -84,7 +84,7 @@ class Course extends Component {
               size="small"
               loading={this.state.loading}
               extra={
-                <div>
+                <>
                   {this.state.finishFlag
                     ? <Tag
                       color="success"
@@ -95,7 +95,7 @@ class Course extends Component {
                       icon={<SyncOutlined spin />}
                     >未完成</Tag>
                   }
-                </div>
+                </>
               }>
               <Row justify="space-around" align="middle" className="rowStyle">
                 <Col span={8}>
@@ -146,7 +146,7 @@ class Course extends Component {
             </Card>
           </div>
         }
-      </div>
+      </>
     )
   }
 }
