@@ -1,6 +1,6 @@
 {
     "name": "网大功能增强",
-    "description": "轻松完成中移网大学习任务！",
+    "description": "助力中移网大学习！",
     "version": "0.9.0",
     "manifest_version": 3,
     "action": {
