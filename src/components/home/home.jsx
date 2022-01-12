@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Row, Col, Tag } from 'antd'
+import { Card, Row, Col, Tag, Popconfirm } from 'antd'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 
 import './home.scss'
@@ -68,19 +68,26 @@ class Home extends Component {
                               </Tag>
                             </Col>
                             <Col span={3}>
-                              <Tag
-                                color="#C3272B"
-                                className="subjectButton"
-                                onClick={() => {
+                              <Popconfirm
+                                title="确定移除该主题吗？"
+                                onConfirm={() => {
                                   const subjectList = this.state.subjectList.filter(item =>
                                     item.name !== element.name
                                   )
                                   this.setState({ subjectList })
                                   chrome.storage.sync.set({ subjectList })
                                 }}
+                                onCancel={() => { }}
+                                okText="是"
+                                cancelText="否"
                               >
-                                删除
-                              </Tag>
+                                <Tag
+                                  color="#C3272B"
+                                  className="subjectButton"
+                                >
+                                  移除
+                                </Tag>
+                              </Popconfirm>
                             </Col>
                           </Row>
                         </div>
