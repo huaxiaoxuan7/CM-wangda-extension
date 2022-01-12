@@ -40,28 +40,30 @@ class Panel extends React.Component {
     return (
       <div>
         <Draggable
-          defaultPosition = {{ x: 1200, y: 200 }}
-          onStop = {(x, y) => this.onPositionChange(x, y)}
+          defaultPosition={{ x: 1200, y: 200 }}
+          onStop={(x, y) => this.onPositionChange(x, y)}
         >
           {
-          this.state.type !== 'Login' &&
+            this.state.type !== 'Login' &&
             <div className="draggable-root">
-            {
-              this.state.type === 'Home'
-                ? <div>{this.state.settings.length > 0 &&
-                   <Home enable={this.state.settings[3].value}/>}</div>
-                : this.state.type === 'Subject'
-                  ? <div>{this.state.settings.length > 0 &&
-                     <Subject enable={this.state.settings[4].value}/>}</div>
-                  : this.state.type === 'Course'
+              <div className='box'>
+                {
+                  this.state.type === 'Home'
                     ? <div>{this.state.settings.length > 0 &&
-                       <Course
-                       enable={this.state.settings[5].value}
-                       settings={this.state.settings.slice(0, 3)}
-                       />}</div>
-                    : null
-            }
-          </div>
+                      <Home enable={this.state.settings[3].value} />}</div>
+                    : this.state.type === 'Subject'
+                      ? <div>{this.state.settings.length > 0 &&
+                        <Subject enable={this.state.settings[4].value} />}</div>
+                      : this.state.type === 'Course'
+                        ? <div>{this.state.settings.length > 0 &&
+                          <Course
+                            enable={this.state.settings[5].value}
+                            settings={this.state.settings.slice(0, 3)}
+                          />}</div>
+                        : null
+                }
+              </div>
+            </div>
           }
         </Draggable>
       </div>

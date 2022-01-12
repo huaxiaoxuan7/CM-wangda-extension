@@ -5,10 +5,46 @@
     cursor    : grab;
     max-height: 800px;
 
-    border       : 1.5px dashed gray;
-    border-radius: 5px;
+    .box {
+        padding : 3px;
+        position: relative;
+        overflow: hidden;
+    }
 
-    &:hover {
-        border: 1.5px solid gray;
+    .box>* {
+        background-color: #fff;
+        position        : relative;
+    }
+
+    .box:before {
+        content   : '';
+        animation : roll linear 2s infinite;
+        background: conic-gradient(#22A7F0, #fff);
+        position  : absolute;
+        width     : 1000px;
+        height    : 1000px;
+        left      : 50%;
+        top       : 50%;
+    }
+
+    .box:hover:before {
+        content   : '';
+        animation : roll linear 2s infinite;
+        background: conic-gradient(#C93756, #fff);
+        position  : absolute;
+        width     : 1000px;
+        height    : 1000px;
+        left      : 50%;
+        top       : 50%;
+    }
+
+    @keyframes roll {
+        from {
+            transform: translate(-50%, -50%) rotateZ(0deg);
+        }
+
+        to {
+            transform: translate(-50%, -50%) rotateZ(-360deg);
+        }
     }
 }
