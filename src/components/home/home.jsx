@@ -26,17 +26,15 @@ class Home extends Component {
 
   render () {
     return (
-      <div>
+      <>
         {
           this.state.showPanel &&
           <div className='homeCard'>
             <Card
-              title={<span className="cardTitle">最近学习的专题</span>}
+              title={<span className="cardTitle">最近打开的专题</span>}
               size="small"
               loading={this.state.loading}
-              extra={
-                <div></div>
-              }>
+              bodyStyle={{ padding: '6px 0px 6px 12px' }} >
               <div className='cardBody'>
                 <Scrollbars
                   autoHeight
@@ -49,7 +47,7 @@ class Home extends Component {
                         <div key={element.index} className="subjects">
                           <Row justify="space-around" align="middle" className="rowStyle">
                             <Col span={17}>
-                              <span className="subjectName">{element.name}</span>
+                              <span className="subjectName">{`[${element.date}]${element.name}`}</span>
                             </Col>
                             <Col span={3} offset={1}>
                               <Tag
@@ -69,7 +67,7 @@ class Home extends Component {
                             </Col>
                             <Col span={3}>
                               <Popconfirm
-                                title="确定移除该主题吗？"
+                                title="确定移除该专题吗？"
                                 onConfirm={() => {
                                   const subjectList = this.state.subjectList.filter(item =>
                                     item.name !== element.name
@@ -99,7 +97,7 @@ class Home extends Component {
             </Card>
           </div>
         }
-      </div>
+      </>
     )
   }
 }

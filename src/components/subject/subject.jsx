@@ -47,16 +47,17 @@ class Subject extends Component {
     chrome.storage.sync.get(['subjectList'], ({ subjectList }) => {
       const url = document.location.toString()
       const find = subjectList.find(element => element.name === subjectName)
+      const date = new Date().toLocaleDateString()
       if (!find) {
-        subjectList.push({ name: subjectName, url })
-        chrome.storage.sync.set({ subjectList }, () => { })
+        subjectList.push({ name: subjectName, url, date })
+        chrome.storage.sync.set({ subjectList })
       }
     })
   }
 
   render () {
     return (
-      <div>
+      <>
         {
           this.state.showPanel &&
           <div className="subjectCard">
@@ -66,7 +67,7 @@ class Subject extends Component {
               loading={this.state.loading}
               bodyStyle={{ padding: '6px 0px 6px 12px' }}
               extra={
-                <div>
+                <>
                   <Tag
                     color="success"
                     icon={<CheckCircleOutlined />}
@@ -78,7 +79,7 @@ class Subject extends Component {
                     icon={<SyncOutlined spin />}
                   >未完成 ：{!this.state.loading ? this.state.unFinished.length : '?'}
                   </Tag>
-                </div>
+                </>
               }>
               <div className='cardBody'>
                 <Scrollbars
@@ -120,7 +121,7 @@ class Subject extends Component {
             </Card>
           </div>
         }
-      </div>
+      </>
     )
   }
 }
