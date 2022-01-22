@@ -20,6 +20,7 @@ class Home extends Component {
 
   componentDidMount () {
     chrome.storage.sync.get(['subjectList'], ({ subjectList }) => {
+      subjectList.reverse()
       this.setState({ subjectList, loading: false })
     })
   }
@@ -91,7 +92,10 @@ class Home extends Component {
                           </Row>
                         </div>
                       ))
-                      : <div className='hintText'><span>近期学习专题列表为空！</span><span>😪</span></div>
+                      : <div className='hintText'>
+                          <span>近期学习专题列表为空！</span>
+                          <span>😪</span>
+                        </div>
                   }
                 </Scrollbars>
               </div>
