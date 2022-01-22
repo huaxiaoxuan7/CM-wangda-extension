@@ -43,7 +43,7 @@ class Home extends Component {
                   width={385}>
                   {
                     this.state.subjectList.length > 0
-                      ? this.state.subjectList.map((element, index) => (
+                      ? this.state.subjectList.map(element => (
                         <div key={element.index} className="subjects">
                           <Row justify="space-around" align="middle" className="rowStyle">
                             <Col span={17}>

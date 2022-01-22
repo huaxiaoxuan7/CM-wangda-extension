@@ -142,16 +142,17 @@ class Course extends Component {
                 valueStyle={{ fontSize: '16px' }}
               >
               </Statistic>
-              {this.state.finishFlag
-                ? <div className='hintText'>
+              {
+                this.state.finishFlag &&
+                <div className='hintText'>
                   {
                     this.state.autoClose
                       ? <span>已完成当前页面所有课程，即将关闭本页面！</span>
                       : <span>已完成当前页面所有课程，可以关闭本页面！</span>
                   }
-                    <span>✌️😏👌</span>
-                  </div>
-                : null}
+                  <span>✌️😏👌</span>
+                </div>
+              }
             </Card>
           </div>
         }

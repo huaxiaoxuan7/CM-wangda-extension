@@ -47,39 +47,45 @@ class Panel extends React.Component {
     })
     this.updatePanel()
     document.onclick = () => this.updatePanel()
+    const root = document.getElementsByClassName('draggable-root')[0]
+    root.onmousedown = () => { root.style.cursor = '-webkit-grabbing' }
+    root.onmouseup = () => { root.style.cursor = '-webkit-grab' }
   }
 
   render () {
     return (
-      <div>
-        <Draggable
-          defaultPosition={{ x: 1100, y: 200 }}
-          onStop={(x, y) => this.onPositionChange(x, y)}
-        >
-          {
-            this.state.type !== 'Login' &&
-            <div className="draggable-root">
-              <div className='box'>
-                {
-                  this.state.type === 'Home'
-                    ? <div>{this.state.settings.length > 0 &&
-                      <Home enable={this.state.settings[3].value} />}</div>
-                    : this.state.type === 'Subject'
-                      ? <div>{this.state.settings.length > 0 &&
-                        <Subject enable={this.state.settings[4].value} />}</div>
-                      : this.state.type === 'Course'
-                        ? <div>{this.state.settings.length > 0 &&
-                          <Course
-                            enable={this.state.settings[5].value}
-                            settings={this.state.settings.slice(0, 3)}
-                          />}</div>
-                        : null
-                }
-              </div>
+      <Draggable
+        defaultPosition={{ x: 900, y: 130 }}
+        onStop={(x, y) => this.onPositionChange(x, y)}
+      >
+        {
+          this.state.type !== 'Login' &&
+          <div className="draggable-root">
+            <div className='box'>
+              {
+                this.state.settings.length > 0 &&
+                <>
+                  {
+                    this.state.type === 'Home' &&
+                    <Home enable={this.state.settings[3].value} />
+                  }
+                  {
+                    this.state.type === 'Subject' &&
+                    <Subject enable={this.state.settings[4].value} />
+                  }
+                  {
+                    this.state.type === 'Course' &&
+                    <Course
+                      enable={this.state.settings[5].value}
+                      settings={this.state.settings.slice(0, 3)} />
+                  }
+                </>
+              }
+
             </div>
-          }
-        </Draggable>
-      </div>
+          </div>
+        }
+      </Draggable>
     )
   }
 }

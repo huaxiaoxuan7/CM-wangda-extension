@@ -13,18 +13,31 @@
   const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   const randomNumber = () => Math.floor(Math.random() * 100)
 
-  const nextCourse = (domElement) => {
+  const nextCourse = (domElement, type) => {
     if (courseEnhanced) {
+      // 如果本节有下一课程，则学习下一课程
       if (domElement.nextElementSibling) {
         domElement.nextElementSibling.click()
         return true
       } else {
-        const nextCourse = domElement.parentNode.parentNode.nextElementSibling
-        if (nextCourse) {
-          nextCourse.querySelector('dl.required').click()
+        // 如果本节没有下一课程，则获取下一节的第一个课程
+        const nextCourseDom = domElement.parentNode.parentNode.nextElementSibling
+        if (nextCourseDom) {
+          // 获取到课程，则开始学习
+          nextCourseDom.querySelector('dl.required').click()
           return true
         } else {
+          // 否则，发送全部学习完成事件
           window.dispatchEvent(new CustomEvent('allFinished'))
+          if (!allFinishedFlag) {
+            if (type === '文档' || type === '图文') {
+              window.dispatchEvent(new CustomEvent('fileFinished'))
+            }
+            if (type === '视频' || type === '音频') {
+              window.dispatchEvent(new CustomEvent('videoFinished'))
+            }
+          }
+          allFinishedFlag = true
         }
         return false
       }
@@ -32,6 +45,7 @@
   }
 
   let scanCounter = 0
+  let allFinishedFlag = false
   let videoSrc = ''
 
   // 面向过程的笨办法🤣😂🤣😂
@@ -43,9 +57,13 @@
     // 获取课程状态
     const status = focused.querySelector('dd > div.pointer > span').innerText
     if (type === '文档' || type === '图文') {
-      // 自动变成已完成，或者超过30秒左右，则学习下一课程
-      if (status === '已完成' || scanCounter >= 38) {
-        if (nextCourse(focused)) {
+      // 超过一分钟没有变化，则刷新页面
+      if (scanCounter >= 75) {
+        document.location.reload()
+      }
+      // 状态变成已完成，则学习下一课程
+      if (status === '已完成') {
+        if (nextCourse(focused, type)) {
           window.dispatchEvent(new CustomEvent('fileFinished'))
         }
         scanCounter = 0
@@ -85,7 +103,7 @@
       }
       if (status === '已完成') {
         // 已完成则学习下一课程
-        if (nextCourse(focused)) {
+        if (nextCourse(focused, type)) {
           window.dispatchEvent(new CustomEvent('videoFinished'))
         }
       }

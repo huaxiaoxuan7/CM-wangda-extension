@@ -96,7 +96,7 @@ class Subject extends Component {
                               <Col span={19}>
                                 <span className="courseType">[{element.type}]</span>
                                 <span className="courseName">{element.name}</span>
-                                <span className="courseStatus">{!element.isCompulsory ? '[选修]' : null}</span>
+                                <span className="courseStatus">{element.isCompulsory ? '[必修]' : '[选修]'}</span>
                               </Col>
                               <Col span={4} offset={1}>
                                 <Tag
