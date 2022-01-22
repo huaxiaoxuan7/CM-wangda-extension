@@ -2,7 +2,7 @@
     z-index : 1000;
     position: fixed;
 
-    cursor    : grab;
+    cursor    : -webkit-grab;
     max-height: 800px;
 
     .box {
@@ -47,4 +47,8 @@
             transform: translate(-50%, -50%) rotateZ(-360deg);
         }
     }
+}
+
+.draggable-root:active {
+    cursor: -moz-grabbing;
 }

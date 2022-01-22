@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Statistic, Tag } from 'antd'
-import { FieldTimeOutlined, VideoCameraOutlined, FilePdfOutlined, RedoOutlined, CheckCircleOutlined, SyncOutlined } from '@ant-design/icons'
+import { FieldTimeOutlined, VideoCameraOutlined, FilePdfOutlined, RedoOutlined, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 
 import './course.scss'
 
@@ -55,11 +55,13 @@ class Course extends Component {
     window.addEventListener('allFinished', () => {
       this.setState({ finishFlag: true })
       if (this.state.autoClose) {
-        chrome.runtime.sendMessage({
-          greeting: JSON.stringify({
-            action: 'close_tab'
+        setTimeout(() => {
+          chrome.runtime.sendMessage({
+            greeting: JSON.stringify({
+              action: 'close_tab'
+            })
           })
-        })
+        }, 5e3)
       }
     })
 
@@ -92,7 +94,7 @@ class Course extends Component {
                     >已完成</Tag>
                     : <Tag
                       color="error"
-                      icon={<SyncOutlined spin />}
+                      icon={<CloseCircleOutlined />}
                     >未完成</Tag>
                   }
                 </>
@@ -110,9 +112,9 @@ class Course extends Component {
 
                 <Col span={8}>
                   <Statistic
-                    title="恢复播放"
-                    value={this.state.pauseCount}
-                    prefix={<RedoOutlined />}
+                    title="完成文档"
+                    value={this.state.fileCount}
+                    prefix={<FilePdfOutlined />}
                     valueStyle={{ fontSize: '16px' }}
                   >
                   </Statistic>
@@ -120,9 +122,9 @@ class Course extends Component {
 
                 <Col span={8}>
                   <Statistic
-                    title="完成文档"
-                    value={this.state.fileCount}
-                    prefix={<FilePdfOutlined />}
+                    title="恢复播放"
+                    value={this.state.pauseCount}
+                    prefix={<RedoOutlined />}
                     valueStyle={{ fontSize: '16px' }}
                   >
                   </Statistic>
@@ -141,7 +143,14 @@ class Course extends Component {
               >
               </Statistic>
               {this.state.finishFlag
-                ? <div className='hintText'><span>已完成当前页面所有课程，可以关闭本页面！</span><span>✌️😏👌</span></div>
+                ? <div className='hintText'>
+                  {
+                    this.state.autoClose
+                      ? <span>已完成当前页面所有课程，即将关闭本页面！</span>
+                      : <span>已完成当前页面所有课程，可以关闭本页面！</span>
+                  }
+                    <span>✌️😏👌</span>
+                  </div>
                 : null}
             </Card>
           </div>

@@ -10,7 +10,7 @@ import './panel.scss'
 class Panel extends React.Component {
   constructor () {
     super()
-    this.state = { type: '', settings: [] }
+    this.state = { type: '', settings: [], currentUrl: '' }
   }
 
   onPositionChange = ({ x, y }) => {
@@ -19,28 +19,41 @@ class Panel extends React.Component {
     }
   }
 
+  updatePanel = () => {
+    const routerParams = document.URL.split('/')
+    if (this.state.currentUrl !== routerParams[4]) {
+      if (routerParams[4] === '#login') {
+        this.setState({ type: 'Login' })
+      } else if (routerParams[4] === 'home' && routerParams[5] === undefined) {
+        this.setState({ type: 'Home' })
+      } else if (routerParams[4] === 'study' && routerParams[6] === 'detail') {
+        if (routerParams[5] === 'subject') {
+          this.setState({ type: 'Subject' })
+        } else if (routerParams[5] === 'course') {
+          this.setState({ type: 'Course' })
+        } else {
+          this.setState({ type: 'hide' })
+        }
+      } else {
+        this.setState({ type: 'hide' })
+      }
+    }
+    this.setState({ currentUrl: routerParams[4] })
+  }
+
   componentDidMount () {
     chrome.storage.sync.get(['settings'], ({ settings }) => {
       this.setState({ settings: settings })
     })
-
-    // 有更好的办法监测地址栏变化吗?😪
-    if (document.URL.split('/')[4] === '#login') {
-      this.setState({ type: 'Login' })
-    } else if (document.URL.split('/')[4] === 'home') {
-      this.setState({ type: 'Home' })
-    } else if (document.URL.split('/')[4] === 'study' && document.URL.split('/')[5] === 'subject') {
-      this.setState({ type: 'Subject' })
-    } else if (document.URL.split('/')[4] === 'study' && document.URL.split('/')[5] === 'course') {
-      this.setState({ type: 'Course' })
-    }
+    this.updatePanel()
+    document.onclick = () => this.updatePanel()
   }
 
   render () {
     return (
       <div>
         <Draggable
-          defaultPosition={{ x: 1200, y: 200 }}
+          defaultPosition={{ x: 1100, y: 200 }}
           onStop={(x, y) => this.onPositionChange(x, y)}
         >
           {

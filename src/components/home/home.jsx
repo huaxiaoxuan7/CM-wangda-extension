@@ -47,7 +47,8 @@ class Home extends Component {
                         <div key={element.index} className="subjects">
                           <Row justify="space-around" align="middle" className="rowStyle">
                             <Col span={17}>
-                              <span className="subjectName">{`[${element.date}]${element.name}`}</span>
+                              <span className="subjectTime">{`[${element.date}]`}</span>
+                              <span className="subjectName">{element.name}</span>
                             </Col>
                             <Col span={3} offset={1}>
                               <Tag

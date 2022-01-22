@@ -16,15 +16,15 @@
         padding      : 4px 0px;
         border-bottom: 0.5px solid gray;
         margin-right : 12px;
-        font-size    : 10px;
+        font-size    : 12px;
 
-        .subjectName {
-          font-size: 10px;
+        .subjectTime {
+          color: #531dab;
         }
 
         .subjectButton {
-          font-weight: 1.4;
-          cursor     : pointer;
+          font-size: 12px;
+          cursor   : pointer;
         }
       }
     }

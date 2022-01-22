@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Tag } from 'antd'
-import { CheckCircleOutlined, SyncOutlined } from '@ant-design/icons'
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 
 import './subject.scss'
@@ -76,7 +76,7 @@ class Subject extends Component {
                   </Tag>
                   <Tag
                     color="error"
-                    icon={<SyncOutlined spin />}
+                    icon={<CloseCircleOutlined />}
                   >未完成 ：{!this.state.loading ? this.state.unFinished.length : '?'}
                   </Tag>
                 </>
@@ -113,8 +113,13 @@ class Subject extends Component {
                             </Row>
                           </div>
                         ))
-                        : <div className='hintText'><span>已完成当前专题下全部课程学习!</span><span>✌️😁👌</span></div>
-                      : <div className='hintText'><span>解析失败，请在页面上手动进入课程！</span><span>😥🥲</span></div>
+                        : <div className='hintText'>
+                            <span>已完成当前专题下全部课程学习!</span>
+                            <span>✌️😁👌</span>
+                          </div>
+                      : <div className='hintText'><span>解析失败，请在页面上手动进入课程！</span>
+                          <span>😥🥲</span>
+                        </div>
                   }
                 </Scrollbars>
               </div>

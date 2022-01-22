@@ -43,8 +43,8 @@
     // 获取课程状态
     const status = focused.querySelector('dd > div.pointer > span').innerText
     if (type === '文档' || type === '图文') {
-      // 自动变成已完成，或者超过20秒左右，则学习下一课程
-      if (status === '已完成' || scanCounter >= 25) {
+      // 自动变成已完成，或者超过30秒左右，则学习下一课程
+      if (status === '已完成' || scanCounter >= 38) {
         if (nextCourse(focused)) {
           window.dispatchEvent(new CustomEvent('fileFinished'))
         }

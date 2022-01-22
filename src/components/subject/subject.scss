@@ -15,14 +15,10 @@
                 padding      : 4px 0px;
                 border-bottom: 0.5px solid gray;
                 margin-right : 12px;
-                font-size    : 10px;
+                font-size    : 12px;
 
                 .courseType {
                     color: #531dab;
-                }
-
-                .courseName {
-                    font-size: 10px;
                 }
 
                 .courseStatus {
@@ -31,7 +27,7 @@
 
                 .courseButton {
                     margin-left: -3px;
-                    font-weight: 1.4;
+                    font-size  : 12px;
                     cursor     : pointer;
                 }
             }
