@@ -57,9 +57,7 @@ class Course extends Component {
       if (this.state.autoClose) {
         setTimeout(() => {
           chrome.runtime.sendMessage({
-            greeting: JSON.stringify({
-              action: 'close_tab'
-            })
+            payload: JSON.stringify({ action: 'close_tab' })
           })
         }, 5e3)
       }

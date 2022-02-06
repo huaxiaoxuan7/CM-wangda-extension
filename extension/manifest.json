@@ -1,10 +1,11 @@
 {
     "name": "网大功能增强",
     "description": "助力中移网大学习！",
-    "version": "0.9.2",
+    "version": "0.9.3",
     "manifest_version": 3,
     "action": {
-        "default_popup": "popup/index.html"
+        "default_popup": "popup/deactivated.html",
+        "default_title": "未在本页面找到网大内容"
     },
     "permissions": [
         "storage",

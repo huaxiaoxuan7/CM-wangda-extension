@@ -57,7 +57,7 @@ class Home extends Component {
                                 className="subjectButton"
                                 onClick={() => {
                                   chrome.runtime.sendMessage({
-                                    greeting: JSON.stringify({
+                                    payload: JSON.stringify({
                                       action: 'open_tab',
                                       url: element.url
                                     })

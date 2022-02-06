@@ -50,6 +50,10 @@ class Panel extends React.Component {
     const root = document.getElementsByClassName('draggable-root')[0]
     root.onmousedown = () => { root.style.cursor = '-webkit-grabbing' }
     root.onmouseup = () => { root.style.cursor = '-webkit-grab' }
+
+    chrome.runtime.sendMessage({
+      payload: JSON.stringify({ action: 'on_load' })
+    })
   }
 
   render () {
