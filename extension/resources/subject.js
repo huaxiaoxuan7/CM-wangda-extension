@@ -44,7 +44,7 @@
         name: names[index].innerText,
         action,
         isInProgress: (action === '开始学习' || action === '继续学习' || action === '参加考试' || action === '进入知识'),
-        isCompulsory: (images[index].children.length === 1)
+        isOptional: !(images[index].children.length === 1)
       })
     })
   }

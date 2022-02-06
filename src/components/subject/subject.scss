@@ -7,6 +7,14 @@
         font-weight: bold;
     }
 
+    .extraArea {
+        .col {
+            display        : flex;
+            align-items    : center;
+            justify-content: center;
+        }
+    }
+
     .cardBody {
 
         .courses {
