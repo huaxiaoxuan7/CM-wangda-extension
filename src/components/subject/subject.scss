@@ -7,15 +7,30 @@
         font-weight: bold;
     }
 
-    .extraArea {
-        .col {
-            display        : flex;
-            align-items    : center;
-            justify-content: center;
-        }
-    }
-
     .cardBody {
+
+        .control {
+            padding     : 4px 0px;
+            margin-right: 12px;
+
+            .row {
+                width: 100%;
+
+                .col {
+                    display        : flex;
+                    align-items    : center;
+                    justify-content: center;
+                }
+            }
+
+            .ant-checkbox-wrapper {
+                font-size: 12px;
+
+                span:last-child {
+                    padding: 0px 2px;
+                }
+            }
+        }
 
         .courses {
 

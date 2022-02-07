@@ -18,8 +18,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // 插件生效时
   if (action === 'on_load') {
     const { tab: { id: tabId } } = sender
-    chrome.action.setTitle({ tabId, title: '网大功能增强正在生效中！' })
-    chrome.action.setBadgeText({ tabId, text: '增强' })
+    chrome.action.setTitle({ tabId, title: '网大功能增强' })
+    chrome.action.setBadgeText({ tabId, text: '启动' })
     chrome.action.setBadgeBackgroundColor({ tabId, color: '#F00' })
     chrome.action.setPopup({ tabId, popup: './popup/activated.html' })
   } else if (action === 'close_tab') {
