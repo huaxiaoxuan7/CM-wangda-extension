@@ -15,8 +15,14 @@ class Subject extends Component {
     this.state = {
       loading: true,
       courses: [],
+      statistics: {
+        finished: undefined,
+        finishedNotOptional: undefined,
+        unfinished: undefined,
+        unfinishedOptional: undefined
+      },
       computedCourses: [],
-      courseFilter: ['notOptional', 'isInProgress'],
+      courseFilter: ['notOptional', 'isInProgress', 'knowledge'],
       showPanel: this.props.enable
     }
   }
@@ -28,7 +34,18 @@ class Subject extends Component {
 
     // detail: data from subject.js
     window.addEventListener('subjectList', ({ detail: courses }) => {
-      this.setState({ loading: false, courses })
+      this.setState({ loading: false, courses }, () => {
+        const optional = this.state.courses.filter(item => item.isOptional)
+        const notOptional = this.state.courses.filter(item => !item.isOptional)
+        this.setState({
+          statistics: {
+            finished: this.state.courses.filter(item => !item.isInProgress).length,
+            finishedNotOptional: notOptional.filter(item => (!item.isInProgress)).length,
+            unfinished: this.state.courses.filter(item => item.isInProgress).length,
+            unfinishedOptional: optional.filter(item => (item.isInProgress)).length
+          }
+        })
+      })
       this.computeCourese(this.state.courseFilter)
     })
 
@@ -68,16 +85,8 @@ class Subject extends Component {
       temp = temp.filter(course => (course.type !== '专题'))
       temp = temp.filter(course => (course.type !== 'URL'))
     }
-    if (!courseFilter.some(element => element === 'test')) {
-      // 不包含考试
-      temp = temp.filter(course => (course.type !== '考试'))
-    }
     this.setState({ computedCourses: temp })
   }
-
-  // onChangeCheckBox = checkedValues => {
-  //   this.computeCourese(checkedValues)
-  // }
 
   render () {
     return (
@@ -95,17 +104,34 @@ class Subject extends Component {
                   <Tag
                     color="success"
                     icon={<CheckCircleOutlined />}
-                  >已完成：
-                    {!this.state.loading
-                      ? this.state.computedCourses.filter(item => (!item.isInProgress)).length
-                      : '?'}
+                  >
+                    <span>已完成</span>
+                    {
+                      !this.state.loading
+                        ? <>
+                          <span>{this.state.statistics.finished}</span>
+                          <span>{`（必修${this.state.statistics.finishedNotOptional}）`}</span>
+                        </>
+                        : '?'
+                    }
+                    {/* {!this.state.loading
+                      ? this.state.statistics.finished
+                      : '?'} */}
                   </Tag>
                   <Tag
                     color="error"
                     icon={<CloseCircleOutlined />}
-                  >未完成 ：{!this.state.loading
-                    ? this.state.computedCourses.filter(item => (item.isInProgress)).length
-                    : '?'}
+                  >
+                    <span>未完成</span>
+                    {
+                      !this.state.loading
+                        ? <>
+                          <span>{this.state.statistics.unfinished}</span>
+                          <span>{`（选修${this.state.statistics.unfinishedOptional}）`}</span>
+                        </>
+                        : '?'
+                    }
+
                   </Tag>
                 </>
               }>
@@ -118,9 +144,9 @@ class Subject extends Component {
                     width={385}>
                     <div className='control'>
                       <Checkbox.Group
-                      onChange={checkedValues => this.computeCourese(checkedValues)}
-                      className="row"
-                      defaultValue={this.state.courseFilter}
+                        onChange={checkedValues => this.computeCourese(checkedValues)}
+                        className="row"
+                        defaultValue={this.state.courseFilter}
                       >
                         <Row justify="space-around" align="middle" gutter={4}>
                           <Col span={7} className="col">
@@ -132,22 +158,20 @@ class Subject extends Component {
                           <Col span={10} className="col">
                             <Checkbox value="knowledge">显示专题、知识、URL</Checkbox>
                           </Col>
-                          {/* <Col span={4} className="col">
-                            <Checkbox value="test">考试</Checkbox>
-                          </Col> */}
                         </Row>
                       </Checkbox.Group>
                     </div>
                     {
                       this.state.courses.length >= 1
                         ? this.state.computedCourses.length >= 1
-                          ? this.state.computedCourses.map(element => (
+                          ? this.state.computedCourses.map((element, index) => (
                             <div key={element.index} className="courses">
                               <Row justify="space-around" align="middle" className="rowStyle">
                                 <Col span={19}>
+                                  <span>{index + 1}.</span>
+                                  <span className="courseStatus">{element.isOptional ? '[选修]' : '[必修]'}</span>
                                   <span className="courseType">[{element.type}]</span>
                                   <span className="courseName">{element.name}</span>
-                                  <span className="courseStatus">{element.isOptional ? '[选修]' : '[必修]'}</span>
                                 </Col>
                                 <Col span={4} offset={1}>
                                   <Tag
