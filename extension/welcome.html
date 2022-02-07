@@ -366,105 +366,93 @@
 </head>
 
 <body>
-    <h1 id="-">使用前必读</h1>
-    <h4 id="overall">Overall</h4>
+    <h3 id="-">使用前必读</h3>
     <ol>
         <li>
-            <p>本增强是出于学习前端技术为⽬的编写的，仅供学习交流使⽤。使用本增强代表<strong>自愿接受</strong>使用增强带来的所有后果，与开发者无关。本增强只作用于<a
-                    href="https://wangda.chinamobile.com/">中移网大</a>，其他页面不生效。<del>有顾虑可以选择不用。</del></p>
+            <p>本扩展仅供学习交流于学习前端技术使⽤。</p>
         </li>
         <li>
-            <p><strong>网大功能增强</strong>是一个基于Edge浏览器的<a
-                    href="edge://extensions/"><strong>扩展</strong></a>，采用现代前端框架开发，项目完全<strong>开源</strong>，使用过程中欢迎访问<a
-                    href="https://github.com/huaxiaoxuan7/CM-wangda-extension">仓库地址</a>提Issue。</p>
-        </li>
-        <li>
-            <p>可以实现专题、课程的快速导航，以及部分<strong>学习增强</strong>功能。</p>
-        </li>
-        <li>
-            <p>所有功能均可通过配置关闭。</p>
-        </li>
-        <li>
-            <p>利用<a
-                    href="edge://extensions/">扩展</a>的特性，最大程度的降低了安装和卸载的学习成本，实现了基于浏览器账号机制实现了同一账号的<strong>插件同步</strong>和<strong>设置同步</strong>。
+            <p>使用本扩展代表<strong>自愿接受</strong>使用增强带来的所有后果，如不愿接受请<a
+                    href="https://support.microsoft.com/zh-cn/microsoft-edge/%E5%9C%A8%E6%89%A9%E5%B1%95%E4%B8%AD%E6%B7%BB%E5%8A%A0-%E5%85%B3%E9%97%AD%E6%88%96%E5%88%A0%E9%99%A4microsoft-edge-9c0ec68c-2fbc-2f2c-9ff0-bdc76f46b026">卸载</a>本扩展。
             </p>
         </li>
         <li>
-            <p>所有增强功能均通过<a
-                    href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model/Introduction">dom
-                    API</a>实现，不存在截取、篡改接口信息等方式。</p>
-        </li>
-        <li>
-            <p>如以前安装过功能类似的<em>油猴脚本</em>，使用本增强前需<strong>卸载</strong>之前的脚本，否则将<strong>无法使用</strong>。</p>
+            <p>本扩展不收集任何账号、密码等个人信息。</p>
         </li>
     </ol>
-    <h4 id="-">功能介绍</h4>
-    <h5 id="1-">1.浮窗</h5>
+    <h3 id="overall">Overall</h3>
+    <blockquote>
+        <p>Microsoft Edge 扩展 是开发人员用于添加或修改 Microsoft Edge 功能的小程序。扩展可改善用户的浏览体验。它通常提供对目标受众很重要的基函数。</p>
+    </blockquote>
+    <ol>
+        <li>
+            <p><strong>网大功能增强</strong>是一个<a
+                    href="https://docs.microsoft.com/zh-cn/microsoft-edge/extensions-chromium/">Microsoft Edge
+                    扩展</a>，采用现代前端框架开发，只作用于<a href="https://wangda.chinamobile.com/">中移网大</a>相关页面。增强功能均通过<a
+                    href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model/Introduction">DOM
+                    API</a>实现。</p>
+        </li>
+        <li>
+            <p>利用<a href="https://docs.microsoft.com/zh-cn/microsoft-edge/extensions-chromium/">Microsoft Edge
+                    扩展</a>的特性，降低了扩展安装和卸载的学习成本，利用Edge浏览器账号机制实现了同一账号的<strong>插件同步</strong>和<strong>设置同步</strong>。</p>
+        </li>
+        <li>
+            <p>本扩展代码<strong>开源</strong>，所有功能均可通过配置关闭。使用过程中有问题请<a
+                    href="https://github.com/huaxiaoxuan7/CM-wangda-extension/issues">提Issue</a>。</p>
+        </li>
+        <li>
+            <p>如以前安装过功能类似的脚本，使用本扩展前需<strong>卸载</strong>之前的脚本，否则将<strong>出现无法预料的结果</strong>。</p>
+        </li>
+    </ol>
+    <h3 id="-">主要功能介绍</h3>
+    <h5 id="1-">1. 选项页面</h5>
     <ul>
-        <li>
-            <p><strong>首页内浮窗(默认开启)</strong>
-                <img src="/assets/homePanel.gif" alt="" title="首页内浮窗">
-                自动记录最近打开的<strong>专题页面</strong>列表，提供专题快速进入按钮。可以删除不需要的专题。
-            </p>
-        </li>
-        <li>
-            <p><strong>专题内浮窗(默认开启)</strong>
-                <img src="/assets/subjectPanel.gif" alt="" title="专题内浮窗">
-                自动搜索当前专题页面下的<strong>课程</strong>列表，提供课程快速进入按钮。课程类型、完成情况或是否选修等信息均有显示。
-            </p>
-        </li>
-        <li>
-            <p><strong>课程内浮窗(默认开启)</strong>
-                <img src="/assets/coursePanel.gif" alt="" title="课程内浮窗">
-                记录当前课程的学习时间以及各种课程的完成次数。
-            </p>
-        </li>
+        <li><strong>通过配置页面配置功能</strong></li>
     </ul>
-    <h5 id="2-">2.学习增强</h5>
+    <p><img src="/assets/settings.gif" alt="" title="通过配置页面配置增强功能"></p>
+    <h5 id="2-">2. 浮窗</h5>
     <ul>
-        <li>
-            <p><strong>音/视频自动恢复播放(默认开启)</strong>
-                <img src="/assets/courseEnhance1.gif" alt="" title="音/视频自动恢复播放">
-            </p>
-        </li>
-        <li>
-            <p><strong>文档/图片自动学习(默认开启)</strong>
-                <img src="/assets/courseEnhance2.gif" alt="" title="文档/图片自动学习">
-            </p>
-        </li>
-        <li>
-            <p><strong>已学习课程自动跳过(默认开启)</strong>
-                <img src="/assets/courseEnhance3.gif" alt="" title="已学习课程自动跳过">
-            </p>
-        </li>
-        <li>
-            <p><strong>课程页面学习结束后自动关闭（默认关闭）</strong>
-                <img src="/assets/courseEnhance4.gif" alt="" title="课程页面学习结束后自动关闭">
-            </p>
-        </li>
-        <li>
-            <p>音视频自动静音(默认开启)</p>
-        </li>
+        <li><strong>首页内浮窗(默认开启)</strong></li>
     </ul>
-    <h5 id="3-">3.选项页面</h5>
+    <p>自动记录最近打开的<strong>专题页面</strong>列表，提供专题快速进入按钮。可以删除不需要的专题。</p>
+    <p><img src="/assets/homePanel.gif" alt="" title="首页内浮窗"></p>
     <ul>
-        <li><strong>通过配置页面配置功能</strong>
-            <img src="/assets/settings.gif" alt="" title="通过配置页面配置增强功能">
+        <li><strong>专题内浮窗(默认开启)</strong></li>
+    </ul>
+    <p>自动搜索当前<strong>专题</strong>页面下的<strong>课程</strong>列表，提供课程快速进入按钮。课程类型、完成情况或是否选修等信息均有显示。</p>
+    <p><img src="/assets/subjectPanel.gif" alt="" title="专题内浮窗"></p>
+    <ul>
+        <li><strong>课程内浮窗(默认开启)</strong></li>
+    </ul>
+    <p>记录当前<strong>课程</strong>的学习时间以及各种课程的完成次数。</p>
+    <p><img src="/assets/coursePanel.gif" alt="" title="课程内浮窗"></p>
+    <h5 id="3-">3. 学习增强</h5>
+    <ul>
+        <li>
+            <p><strong>音/视频自动恢复播放(默认开启)</strong></p>
+        </li>
+        <li>
+            <p><strong>文档/图片自动学习(默认开启)</strong></p>
+        </li>
+        <li>
+            <p><strong>已学习课程自动跳过(默认开启)</strong></p>
+        </li>
+        <li>
+            <p><strong>课程页面学习结束后自动关闭（默认关闭）</strong></p>
+        </li>
+        <li>
+            <p><strong>音视频自动静音(默认开启)</strong></p>
         </li>
     </ul>
     <h4 id="-edge-">原有脚本卸载（如Edge浏览器上未安装过则忽略）</h4>
     <ul>
-        <li>
-            <p><strong>直接卸载插件</strong>
-                <img src="/assets/uninstallCrx.gif" alt="" title="直接卸载插件">
-            </p>
-        </li>
-        <li>
-            <p><strong>删除之前脚本</strong>
-                <img src="/assets/uninstallScript.gif" alt="" title="直接卸载插件">
-            </p>
-        </li>
+        <li><strong>直接卸载插件</strong></li>
     </ul>
+    <p><img src="/assets/uninstallCrx.gif" alt="" title="直接卸载插件"></p>
+    <ul>
+        <li><strong>删除之前脚本</strong></li>
+    </ul>
+    <p><img src="/assets/uninstallScript.gif" alt="" title="直接卸载插件"></p>
 </body>
 
 </html>

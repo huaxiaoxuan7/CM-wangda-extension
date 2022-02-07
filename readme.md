@@ -1,56 +1,64 @@
-# 使用前必读
+### 使用前必读
+1. 本扩展仅供学习交流于学习前端技术使⽤。
 
-#### Overall
-1. 本增强是出于学习前端技术为⽬的编写的，仅供学习交流使⽤。使用本增强代表**自愿接受**使用增强带来的所有后果，与开发者无关。本增强只作用于[中移网大](https://wangda.chinamobile.com/)，其他页面不生效。~~有顾虑可以选择不用。~~
+2. 使用本扩展代表**自愿接受**使用增强带来的所有后果，如不愿接受请[卸载](https://support.microsoft.com/zh-cn/microsoft-edge/%E5%9C%A8%E6%89%A9%E5%B1%95%E4%B8%AD%E6%B7%BB%E5%8A%A0-%E5%85%B3%E9%97%AD%E6%88%96%E5%88%A0%E9%99%A4microsoft-edge-9c0ec68c-2fbc-2f2c-9ff0-bdc76f46b026)本扩展。
 
-2. **网大功能增强**是一个基于Edge浏览器的[**扩展**](edge://extensions/)，采用现代前端框架开发，项目完全**开源**，使用过程中欢迎访问[仓库地址](https://github.com/huaxiaoxuan7/CM-wangda-extension)提Issue。
+3. 本扩展不收集任何账号、密码等个人信息。
 
-3. 可以实现专题、课程的快速导航，以及部分**学习增强**功能。
 
-4. 所有功能均可通过配置关闭。
+### Overall
+>Microsoft Edge 扩展 是开发人员用于添加或修改 Microsoft Edge 功能的小程序。扩展可改善用户的浏览体验。它通常提供对目标受众很重要的基函数。
 
-5. 利用[扩展](edge://extensions/)的特性，最大程度的降低了安装和卸载的学习成本，实现了基于浏览器账号机制实现了同一账号的**插件同步**和**设置同步**。
+1. **网大功能增强**是一个[Microsoft Edge 扩展](https://docs.microsoft.com/zh-cn/microsoft-edge/extensions-chromium/)，采用现代前端框架开发，只作用于[中移网大](https://wangda.chinamobile.com/)相关页面。增强功能均通过[DOM API](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model/Introduction)实现。
 
-6. 所有增强功能均通过[dom API](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model/Introduction)实现，不存在截取、篡改接口信息等方式。
+2. 利用[Microsoft Edge 扩展](https://docs.microsoft.com/zh-cn/microsoft-edge/extensions-chromium/)的特性，降低了扩展安装和卸载的学习成本，利用Edge浏览器账号机制实现了同一账号的**插件同步**和**设置同步**。
 
-7. 如以前安装过功能类似的*油猴脚本*，使用本增强前需**卸载**之前的脚本，否则将**无法使用**。
+3. 本扩展代码**开源**，所有功能均可通过配置关闭。使用过程中有问题请[提Issue](https://github.com/huaxiaoxuan7/CM-wangda-extension/issues)。
+
+4. 如以前安装过功能类似的脚本，使用本扩展前需**卸载**之前的脚本，否则将**出现无法预料的结果**。
  
-#### 功能介绍
-##### 1.浮窗
+### 主要功能介绍
+
+##### 1. 选项页面
+- **通过配置页面配置功能**
+
+![](/assets/settings.gif "通过配置页面配置增强功能")
+##### 2. 浮窗
 - **首页内浮窗(默认开启)**
-![](/assets/homePanel.gif "首页内浮窗")
+
 自动记录最近打开的**专题页面**列表，提供专题快速进入按钮。可以删除不需要的专题。
 
+![](/assets/homePanel.gif "首页内浮窗")
+
 - **专题内浮窗(默认开启)**
+
+自动搜索当前**专题**页面下的**课程**列表，提供课程快速进入按钮。课程类型、完成情况或是否选修等信息均有显示。
+
 ![](/assets/subjectPanel.gif "专题内浮窗")
-自动搜索当前专题页面下的**课程**列表，提供课程快速进入按钮。课程类型、完成情况或是否选修等信息均有显示。
+
 
 - **课程内浮窗(默认开启)**
-![](/assets/coursePanel.gif "课程内浮窗")
-记录当前课程的学习时间以及各种课程的完成次数。
 
-##### 2.学习增强
+记录当前**课程**的学习时间以及各种课程的完成次数。
+
+![](/assets/coursePanel.gif "课程内浮窗")
+
+##### 3. 学习增强
 - **音/视频自动恢复播放(默认开启)**
-![](/assets/courseEnhance1.gif "音/视频自动恢复播放")
 
 - **文档/图片自动学习(默认开启)**
-![](/assets/courseEnhance2.gif "文档/图片自动学习")
 
 - **已学习课程自动跳过(默认开启)**
-![](/assets/courseEnhance3.gif "已学习课程自动跳过")
 
 - **课程页面学习结束后自动关闭（默认关闭）**
-![](/assets/courseEnhance4.gif "课程页面学习结束后自动关闭")
 
-- 音视频自动静音(默认开启)
-
-##### 3.选项页面
-- **通过配置页面配置功能**
-![](/assets/settings.gif "通过配置页面配置增强功能")
+- **音视频自动静音(默认开启)**
 
 #### 原有脚本卸载（如Edge浏览器上未安装过则忽略）
 - **直接卸载插件**
+
 ![](/assets/uninstallCrx.gif "直接卸载插件")
 
 - **删除之前脚本**
+
 ![](/assets/uninstallScript.gif "直接卸载插件")

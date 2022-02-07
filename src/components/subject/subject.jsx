@@ -69,7 +69,6 @@ class Subject extends Component {
   }
 
   computeCourese = courseFilter => {
-    // console.log(typeof (courseFilter), courseFilter, courseFilter.some(element => element === 'optional'))
     let temp = this.state.courses
     if (courseFilter.some(element => (element === 'notOptional'))) {
       // 只显示必修
@@ -114,9 +113,6 @@ class Subject extends Component {
                         </>
                         : '?'
                     }
-                    {/* {!this.state.loading
-                      ? this.state.statistics.finished
-                      : '?'} */}
                   </Tag>
                   <Tag
                     color="error"
@@ -131,7 +127,6 @@ class Subject extends Component {
                         </>
                         : '?'
                     }
-
                   </Tag>
                 </>
               }>
