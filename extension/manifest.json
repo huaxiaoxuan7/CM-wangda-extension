@@ -1,7 +1,7 @@
 {
     "name": "网大功能增强",
     "description": "助力中移网大学习！",
-    "version": "0.9.3",
+    "version": "0.9.4",
     "manifest_version": 3,
     "action": {
         "default_popup": "popup/deactivated.html",
