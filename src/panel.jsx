@@ -59,7 +59,7 @@ class Panel extends React.Component {
   render () {
     return (
       <Draggable
-        defaultPosition={{ x: 900, y: 110 }}
+        defaultPosition={{ x: 900, y: 120 }}
         onStop={(x, y) => this.onPositionChange(x, y)}
       >
         {

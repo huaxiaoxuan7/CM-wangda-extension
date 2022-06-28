@@ -29,7 +29,8 @@
     "webpack-cli": "^4.7.2"
   },
   "scripts": {
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "dev": "webpack --watch"
   },
   "keywords": [],
   "author": "",

@@ -20,10 +20,18 @@
                 "https://wangda.chinamobile.com/*"
             ],
             "js": [
-                "content-scripts/app.js",
                 "content-scripts/dom/dom.js"
             ],
             "run_at": "document_end"
+        },
+        {
+            "matches": [
+                "https://wangda.chinamobile.com/*"
+            ],
+            "js": [
+                "content-scripts/app.js"
+            ],
+            "run_at": "document_start"
         }
     ],
     "web_accessible_resources": [

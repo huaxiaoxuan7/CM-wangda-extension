@@ -3,7 +3,7 @@
 
   window.addEventListener('openCourse', ({ detail }) => {
     const { pointer } = detail
-    buttons[pointer].click()
+    getElements('btn small').then(buttons => buttons[pointer].click())
   })
 
   const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))

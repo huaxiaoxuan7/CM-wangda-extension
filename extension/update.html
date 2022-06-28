@@ -1,380 +1,395 @@
 <!DOCTYPE html>
+<html>
 
 <head>
-  <meta charset='utf-8'>
-  <style type='text/css'>
-    <!--
-    body {
-      border-collapse: collapse;
-    }
+  <title>changelog.md</title>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
-    a.anchor,
-    ol,
-    ul {
-      padding-left: 30px
-    }
-
-    dl dt,
-    table tr th {
-      font-weight: 700
-    }
+  <style>
+    /* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+    /*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
     body {
-      font-family: Helvetica, arial, sans-serif;
-      font-size: 14px;
-      line-height: 1.6;
-      background-color: #fff;
-      padding: 30px
+      font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+      font-size: var(--vscode-markdown-font-size, 14px);
+      padding: 0 26px;
+      line-height: var(--vscode-markdown-line-height, 22px);
+      word-wrap: break-word;
     }
 
-    body>:first-child {
-      margin-top: 0 !important
+    #code-csp-warning {
+      position: fixed;
+      top: 0;
+      right: 0;
+      color: white;
+      margin: 16px;
+      text-align: center;
+      font-size: 12px;
+      font-family: sans-serif;
+      background-color: #444444;
+      cursor: pointer;
+      padding: 6px;
+      box-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
     }
 
-    h1 p,
-    h2 p,
-    h3 p,
-    h4 p,
-    h5 p,
-    h6 p,
-    ol :first-child,
-    ul :first-child {
-      margin-top: 0
+    #code-csp-warning:hover {
+      text-decoration: none;
+      background-color: #007acc;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
     }
 
-    body>:last-child {
-      margin-bottom: 0 !important
+    body.scrollBeyondLastLine {
+      margin-bottom: calc(100vh - 22px);
     }
 
-    blockquote>:last-child,
-    dl dd>:last-child,
-    dl dt>:last-child,
-    ol :last-child,
-    table tr td :last-child,
-    table tr th :last-child,
-    ul :last-child {
-      margin-bottom: 0
+    body.showEditorSelection .code-line {
+      position: relative;
+    }
+
+    body.showEditorSelection .code-active-line:before,
+    body.showEditorSelection .code-line:hover:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: -12px;
+      height: 100%;
+    }
+
+    body.showEditorSelection li.code-active-line:before,
+    body.showEditorSelection li.code-line:hover:before {
+      left: -30px;
+    }
+
+    .vscode-light.showEditorSelection .code-active-line:before {
+      border-left: 3px solid rgba(0, 0, 0, 0.15);
+    }
+
+    .vscode-light.showEditorSelection .code-line:hover:before {
+      border-left: 3px solid rgba(0, 0, 0, 0.40);
+    }
+
+    .vscode-light.showEditorSelection .code-line .code-line:hover:before {
+      border-left: none;
+    }
+
+    .vscode-dark.showEditorSelection .code-active-line:before {
+      border-left: 3px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .vscode-dark.showEditorSelection .code-line:hover:before {
+      border-left: 3px solid rgba(255, 255, 255, 0.60);
+    }
+
+    .vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+      border-left: none;
+    }
+
+    .vscode-high-contrast.showEditorSelection .code-active-line:before {
+      border-left: 3px solid rgba(255, 160, 0, 0.7);
+    }
+
+    .vscode-high-contrast.showEditorSelection .code-line:hover:before {
+      border-left: 3px solid rgba(255, 160, 0, 1);
+    }
+
+    .vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+      border-left: none;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
     }
 
     a {
-      color: #4183C4
+      text-decoration: none;
     }
 
-    a.absent {
-      color: #c00
+    a:hover {
+      text-decoration: underline;
     }
 
-    h1,
-    h2 {
-      color: #000
+    a:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 1px solid -webkit-focus-ring-color;
+      outline-offset: -1px;
     }
 
-    blockquote,
-    h6 {
-      color: #777
+    hr {
+      border: 0;
+      height: 2px;
+      border-bottom: 2px solid;
     }
 
-    a.anchor {
-      display: block;
-      margin-left: -30px;
-      cursor: pointer;
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0
-    }
-
-    dl,
-    dl dt,
-    dl dt:first-child,
-    hr,
-    table,
-    table tr {
-      padding: 0
+    h1 {
+      padding-bottom: 0.3em;
+      line-height: 1.2;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
     }
 
     h1,
     h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      margin: 20px 0 10px;
-      padding: 0;
-      font-weight: 700;
-      -webkit-font-smoothing: antialiased;
-      cursor: text;
-      position: relative
-    }
-
-    h1:hover a.anchor,
-    h2:hover a.anchor,
-    h3:hover a.anchor,
-    h4:hover a.anchor,
-    h5:hover a.anchor,
-    h6:hover a.anchor {
-      background: url(../../images/modules/styleguide/para.png) 10px center no-repeat;
-      text-decoration: none
-    }
-
-    code,
-    table tr:nth-child(2n),
-    tt {
-      background-color: #f8f8f8
-    }
-
-    h1 code,
-    h1 tt,
-    h2 code,
-    h2 tt,
-    h3 code,
-    h3 tt,
-    h4 code,
-    h4 tt,
-    h5 code,
-    h5 tt,
-    h6 code,
-    h6 tt {
-      font-size: inherit
-    }
-
-    h1 {
-      font-size: 28px
-    }
-
-    h2 {
-      font-size: 24px;
-      border-bottom: 1px solid #ccc
-    }
-
     h3 {
-      font-size: 18px
+      font-weight: normal;
     }
 
-    h4 {
-      font-size: 16px
+    table {
+      border-collapse: collapse;
     }
 
-    dl dt,
-    h5,
-    h6 {
-      font-size: 14px
-    }
-
-    blockquote,
-    dl,
-    li,
-    ol,
-    p,
-    pre,
-    table,
-    ul {
-      margin: 15px 0
-    }
-
-    hr {
-      background: url(../../images/modules/pulls/dirty-shade.png) repeat-x;
-      border: 0;
-      color: #ccc;
-      height: 4px
-    }
-
-    a:first-child h1,
-    a:first-child h2,
-    a:first-child h3,
-    a:first-child h4,
-    a:first-child h5,
-    a:first-child h6,
-    body>h1:first-child,
-    body>h1:first-child+h2,
-    body>h2:first-child,
-    body>h3:first-child,
-    body>h4:first-child,
-    body>h5:first-child,
-    body>h6:first-child {
-      margin-top: 0;
-      padding-top: 0
-    }
-
-    table tr td,
-    table tr th {
-      border: 1px solid #ccc;
+    table>thead>tr>th {
       text-align: left;
-      margin: 0;
-      padding: 6px 13px
+      border-bottom: 1px solid;
     }
 
-    li p.first {
-      display: inline-block
+    table>thead>tr>th,
+    table>thead>tr>td,
+    table>tbody>tr>th,
+    table>tbody>tr>td {
+      padding: 5px 10px;
     }
 
-    dl dt {
-      font-style: italic;
-      margin: 15px 0 5px
-    }
-
-    blockquote>:first-child,
-    dl dd>:first-child,
-    dl dt>:first-child,
-    table tr td :first-child,
-    table tr th :first-child {
-      margin-top: 0
-    }
-
-    dl dd {
-      margin: 0 0 15px;
-      padding: 0 15px
+    table>tbody>tr+tr>td {
+      border-top: 1px solid;
     }
 
     blockquote {
-      border-left: 4px solid #ddd;
-      padding: 0 15px
+      margin: 0 7px 0 5px;
+      padding: 0 16px 0 10px;
+      border-left-width: 5px;
+      border-left-style: solid;
     }
 
-    table tr {
-      border-top: 1px solid #ccc;
-      background-color: #fff;
-      margin: 0
+    code {
+      font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+      font-size: 1em;
+      line-height: 1.357em;
     }
 
-    img {
-      max-width: 100%
+    body.wordWrap pre {
+      white-space: pre-wrap;
     }
 
-    span.frame {
-      display: block;
-      overflow: hidden
-    }
-
-    span.frame>span {
-      border: 1px solid #ddd;
-      display: block;
-      float: left;
-      overflow: hidden;
-      margin: 13px 0 0;
-      padding: 7px;
-      width: auto
-    }
-
-    span.frame span img {
-      display: block;
-      float: left
-    }
-
-    span.frame span span {
-      clear: both;
-      color: #333;
-      display: block;
-      padding: 5px 0 0
-    }
-
-    span.align-center {
-      display: block;
-      overflow: hidden;
-      clear: both
-    }
-
-    span.align-center>span {
-      display: block;
-      overflow: hidden;
-      margin: 13px auto 0;
-      text-align: center
-    }
-
-    span.align-center span img {
-      margin: 0 auto;
-      text-align: center
-    }
-
-    span.align-right {
-      display: block;
-      overflow: hidden;
-      clear: both
-    }
-
-    span.align-right>span {
-      display: block;
-      overflow: hidden;
-      margin: 13px 0 0;
-      text-align: right
-    }
-
-    span.align-right span img {
-      margin: 0;
-      text-align: right
-    }
-
-    span.float-left {
-      display: block;
-      margin-right: 13px;
-      overflow: hidden;
-      float: left
-    }
-
-    span.float-left span {
-      margin: 13px 0 0
-    }
-
-    span.float-right {
-      display: block;
-      margin-left: 13px;
-      overflow: hidden;
-      float: right
-    }
-
-    span.float-right>span {
-      display: block;
-      overflow: hidden;
-      margin: 13px auto 0;
-      text-align: right
-    }
-
-    code,
-    tt {
-      margin: 0 2px;
-      padding: 0 5px;
-      white-space: nowrap;
-      border: 1px solid #eaeaea;
-      border-radius: 3px
+    pre:not(.hljs),
+    pre.hljs code>div {
+      padding: 16px;
+      border-radius: 3px;
+      overflow: auto;
     }
 
     pre code {
-      margin: 0;
-      padding: 0;
-      white-space: pre;
-      background: 0 0
+      color: var(--vscode-editor-foreground);
+      tab-size: 4;
     }
 
-    .highlight pre,
+    /** Theming */
+
+    .vscode-light pre {
+      background-color: rgba(220, 220, 220, 0.4);
+    }
+
+    .vscode-dark pre {
+      background-color: rgba(10, 10, 10, 0.4);
+    }
+
+    .vscode-high-contrast pre {
+      background-color: rgb(0, 0, 0);
+    }
+
+    .vscode-high-contrast h1 {
+      border-color: rgb(0, 0, 0);
+    }
+
+    .vscode-light table>thead>tr>th {
+      border-color: rgba(0, 0, 0, 0.69);
+    }
+
+    .vscode-dark table>thead>tr>th {
+      border-color: rgba(255, 255, 255, 0.69);
+    }
+
+    .vscode-light h1,
+    .vscode-light hr,
+    .vscode-light table>tbody>tr+tr>td {
+      border-color: rgba(0, 0, 0, 0.18);
+    }
+
+    .vscode-dark h1,
+    .vscode-dark hr,
+    .vscode-dark table>tbody>tr+tr>td {
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+  </style>
+
+  <style>
+    /* Tomorrow Theme */
+    /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+    /* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+    /* Tomorrow Comment */
+    .hljs-comment,
+    .hljs-quote {
+      color: #8e908c;
+    }
+
+    /* Tomorrow Red */
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-tag,
+    .hljs-name,
+    .hljs-selector-id,
+    .hljs-selector-class,
+    .hljs-regexp,
+    .hljs-deletion {
+      color: #c82829;
+    }
+
+    /* Tomorrow Orange */
+    .hljs-number,
+    .hljs-built_in,
+    .hljs-builtin-name,
+    .hljs-literal,
+    .hljs-type,
+    .hljs-params,
+    .hljs-meta,
+    .hljs-link {
+      color: #f5871f;
+    }
+
+    /* Tomorrow Yellow */
+    .hljs-attribute {
+      color: #eab700;
+    }
+
+    /* Tomorrow Green */
+    .hljs-string,
+    .hljs-symbol,
+    .hljs-bullet,
+    .hljs-addition {
+      color: #718c00;
+    }
+
+    /* Tomorrow Blue */
+    .hljs-title,
+    .hljs-section {
+      color: #4271ae;
+    }
+
+    /* Tomorrow Purple */
+    .hljs-keyword,
+    .hljs-selector-tag {
+      color: #8959a8;
+    }
+
+    .hljs {
+      display: block;
+      overflow-x: auto;
+      color: #4d4d4c;
+      padding: 0.5em;
+    }
+
+    .hljs-emphasis {
+      font-style: italic;
+    }
+
+    .hljs-strong {
+      font-weight: bold;
+    }
+  </style>
+
+  <style>
+    /*
+ * Markdown PDF CSS
+ */
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+      padding: 0 12px;
+    }
+
     pre {
       background-color: #f8f8f8;
-      border: 1px solid #ccc;
-      font-size: 13px;
-      line-height: 19px;
-      overflow: auto;
-      padding: 6px 10px;
-      border-radius: 3px
+      border: 1px solid #cccccc;
+      border-radius: 3px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
     }
 
-    pre code,
-    pre tt {
-      background-color: transparent;
-      border: none
+    pre:not(.hljs) {
+      padding: 23px;
+      line-height: 19px;
     }
-    -->
+
+    blockquote {
+      background: rgba(127, 127, 127, 0.1);
+      border-color: rgba(0, 122, 204, 0.5);
+    }
+
+    .emoji {
+      height: 1.4em;
+    }
+
+    code {
+      font-size: 14px;
+      line-height: 19px;
+    }
+
+    /* for inline code */
+    :not(pre):not(.hljs)>code {
+      color: #C9AE75;
+      /* Change the old color so it seems less like an error */
+      font-size: inherit;
+    }
+
+    /* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+    .page {
+      page-break-after: always;
+    }
   </style>
+
+  <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
 </head>
 
 <body>
-  <h2 id="-changelog">网大功能增强 Changelog</h2>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+        ? 'dark'
+        : 'default'
+    });
+  </script>
+  <h2 id="%E7%BD%91%E5%A4%A7%E5%8A%9F%E8%83%BD%E5%A2%9E%E5%BC%BA-changelog">网大功能增强 Changelog</h2>
   <hr>
-  <h5 id="0-9-4-2022-02-16">0.9.4 版本，提交审核时间：2022-02-16</h5>
+  <h4 id="094-%E7%89%88%E6%9C%AC-%E6%8F%90%E4%BA%A4%E5%AE%A1%E6%A0%B8%E6%97%B6%E9%97%B42022-02-16">0.9.4 版本
+    提交审核时间：2022-02-16</h4>
   <ul>
-    <li>主要更新：<ol>
+    <li>主要更新：
+      <ol>
         <li>测试版本上线</li>
       </ol>
     </li>
   </ul>
+  <h4 id="095-%E7%89%88%E6%9C%AC-%E6%8F%90%E4%BA%A4%E5%AE%A1%E6%A0%B8%E6%97%B6%E9%97%B42022-06-28">0.9.5 版本
+    提交审核时间：2022-06-28</h4>
+  <ul>
+    <li>主要更新：
+      <ol>
+        <li>修复了专题面板点击课程有几率不跳转的问题</li>
+        <li>根据新版网大布局略微调整了面板首次出现的位置</li>
+      </ol>
+    </li>
+  </ul>
+
 </body>
 
 </html>
