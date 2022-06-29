@@ -10,6 +10,6 @@ element.id = 'appAnchor'
 document.body.insertAdjacentElement('afterbegin', element)
 
 ReactDOM.render(
-     <Panel/>,
+     <Panel />,
      document.getElementById('appAnchor')
 )

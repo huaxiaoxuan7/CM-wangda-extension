@@ -1,3 +1,19 @@
+chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
+  if ('title' in info) {
+    if (info.title === '中国移动网上人才发展中心') {
+      if (tab.url.includes('https://wangda.chinamobile.com')) {
+        const routerParams = tab.url.split('/')
+        if (routerParams[4] !== 'exam') {
+          chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            files: ['content-scripts/dom/dom.js']
+          })
+        }
+      }
+    }
+  }
+})
+
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason === 'install') {
     chrome.storage.sync.set({
