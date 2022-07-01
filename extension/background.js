@@ -1,3 +1,5 @@
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+
 chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
   if ('title' in info) {
     if (info.title === '中国移动网上人才发展中心') {
@@ -48,5 +50,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } else if (action === 'open_tab') {
     const { url } = JSON.parse(request.payload)
     chrome.tabs.create({ url })
+  } else if (action === 'walk_tab') {
+    chrome.tabs.query({ currentWindow: true }, async (tabs) => {
+      for (let index = 0; index < tabs.length; index++) {
+        chrome.tabs.update(tabs[index].id, { highlighted: true })
+        await wait(1000)
+      }
+    })
   }
 })
