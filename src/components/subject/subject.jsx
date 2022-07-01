@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Card, Tag, Checkbox } from 'antd'
+import { Row, Col, Card, Tag, Checkbox, Input } from 'antd'
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 
@@ -23,7 +23,8 @@ class Subject extends Component {
       },
       computedCourses: [],
       courseFilter: ['notOptional', 'isInProgress', 'knowledge'],
-      showPanel: this.props.enable
+      showPanel: this.props.enable,
+      openNum: undefined
     }
   }
 
@@ -85,6 +86,27 @@ class Subject extends Component {
       temp = temp.filter(course => (course.type !== 'URL'))
     }
     this.setState({ computedCourses: temp })
+    if (this.state.openNum === undefined) {
+      this.setState({ openNum: parseInt((this.state.computedCourses.length / 2).toFixed(0)) })
+    }
+    if (this.state.openNum > this.state.computedCourses.length) {
+      this.setState({ openNum: this.state.computedCourses.length })
+    }
+  }
+
+  openMultipleCourse = () => {
+    const gap = parseInt((this.state.computedCourses.length / this.state.openNum).toFixed(0))
+    const indexGroup = []
+    for (let i = 0; i < this.state.openNum; i++) {
+      indexGroup.push(i * gap)
+    }
+    indexGroup.forEach(index => {
+      const event = new CustomEvent('openCourse', { detail: { pointer: index } })
+      window.dispatchEvent(event)
+    })
+    setTimeout(() => {
+      chrome.runtime.sendMessage({ payload: JSON.stringify({ action: 'walk_tab' }) })
+    }, 1000)
   }
 
   render () {
@@ -138,24 +160,52 @@ class Subject extends Component {
                     autoHeightMax={700}
                     width={385}>
                     <div className='control'>
-                      <Checkbox.Group
-                        onChange={checkedValues => this.computeCourese(checkedValues)}
-                        className="row"
-                        defaultValue={this.state.courseFilter}
-                      >
-                        <Row justify="space-around" align="middle" gutter={4}>
-                          <Col span={7} className="col">
+                      <Row justify="space-around" align="middle" gutter={4}>
+                        <Col span={9}>
+                          <Checkbox.Group
+                            onChange={checkedValues => this.computeCourese(checkedValues)}
+                            className="checks"
+                            defaultValue={this.state.courseFilter}
+                          >
                             <Checkbox value="notOptional">只显示必修</Checkbox>
-                          </Col>
-                          <Col span={7} className="col">
+                            <br />
                             <Checkbox value="isInProgress">只显示未完成</Checkbox>
-                          </Col>
-                          <Col span={10} className="col">
+                            <br />
                             <Checkbox value="knowledge">显示专题、知识、URL</Checkbox>
-                          </Col>
-                        </Row>
-                      </Checkbox.Group>
+                          </Checkbox.Group>
+                        </Col>
+                        <Col span={15}>
+                          {
+                            this.state.computedCourses.length >= 1 &&
+                            <div className='auto-open'>
+                              <Input size="small" type="number"
+                                addonBefore="同时学" addonAfter="个课程"
+                                onChange={e => {
+                                  if (e.target.value > 0) {
+                                    if (e.target.value > this.state.computedCourses.length) {
+                                      this.setState({ openNum: this.state.computedCourses.length })
+                                    } else {
+                                      this.setState({ openNum: parseInt(e.target.value) })
+                                    }
+                                  } else {
+                                    this.setState({ openNum: null })
+                                  }
+                                }}
+                                value={this.state.openNum} />
+                              <span
+                                className="openButton"
+                                onClick={() => this.openMultipleCourse()
+                                }
+                              >
+                                开始！
+                              </span>
+                            </div>
+                          }
+
+                        </Col>
+                      </Row>
                     </div>
+
                     {
                       this.state.courses.length >= 1
                         ? this.state.computedCourses.length >= 1

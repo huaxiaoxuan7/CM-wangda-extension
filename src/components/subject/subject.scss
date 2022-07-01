@@ -13,14 +13,28 @@
             padding     : 4px 0px;
             margin-right: 12px;
 
-            .row {
-                width: 100%;
+            .auto-open {
+                display: flex;
+                flex-direction: row;
+                .ant-input-group-wrapper {
 
-                .col {
-                    display        : flex;
-                    align-items    : center;
-                    justify-content: center;
+                    .ant-input-group-addon {
+                        font-size: 12px;
+                    }
                 }
+
+                .openButton {
+                    width: 64px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    text-align: right;
+                    line-height: 35px;
+                    cursor     : pointer;
+                    background-color: #108ee9;
+                    color: #fff;
+                    border-radius: 0px 2px 2px 0px;
+                }
+
             }
 
             .ant-checkbox-wrapper {
