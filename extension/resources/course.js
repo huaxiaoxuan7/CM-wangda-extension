@@ -91,13 +91,18 @@
             media.muted = true
           }
         }
-        // 发现暂停则恢复播放
         if (courseEnhanced) {
-          const [pauseFlag] = document.getElementsByClassName('vjs-play-control vjs-control vjs-button vjs-paused')
-          if (pauseFlag) {
+          const pauseFlag = document.querySelector('button.videojs-referse-btn.vjs-hidden')
+          // 发现暂停则恢复播放
+          if (!pauseFlag) {
+            const replay = document.querySelector('button.videojs-referse-btn')
             await wait(400)
-            pauseFlag.click()
+            replay.click()
             window.dispatchEvent(new CustomEvent('preventPause'))
+          }
+          const slowFlag = document.querySelector('div.slow-img.iconfont.icon-reload')
+          if (slowFlag) {
+            slowFlag.click()
           }
         }
       }
@@ -107,6 +112,8 @@
           window.dispatchEvent(new CustomEvent('videoFinished'))
         }
       }
+      const title = document.querySelector('div.h3.strong')
+      title.click()
     }
   }, 800)
 })()

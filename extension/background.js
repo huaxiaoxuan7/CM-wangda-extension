@@ -51,9 +51,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     const { url } = JSON.parse(request.payload)
     chrome.tabs.create({ url })
   } else if (action === 'walk_tab') {
-    chrome.tabs.query({ currentWindow: true }, async (tabs) => {
+    chrome.tabs.query({
+      currentWindow: true, url: 'https://wangda.chinamobile.com/*'
+    }, async (tabs) => {
       for (let index = 0; index < tabs.length; index++) {
-        chrome.tabs.update(tabs[index].id, { highlighted: true })
+        chrome.tabs.update(tabs[index].id, { highlighted: true, muted: true })
         await wait(1000)
       }
     })

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Card, Tag, Checkbox, Input } from 'antd'
+import { Row, Col, Card, Tag, Checkbox, Input, Tooltip } from 'antd'
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 
@@ -86,7 +86,9 @@ class Subject extends Component {
       temp = temp.filter(course => (course.type !== 'URL'))
     }
     this.setState({ computedCourses: temp })
-    if (this.state.openNum === undefined) {
+    if (this.state.computedCourses.length > 12) {
+      this.setState({ openNum: parseInt((this.state.computedCourses.length / 3).toFixed(0)) })
+    } else {
       this.setState({ openNum: parseInt((this.state.computedCourses.length / 2).toFixed(0)) })
     }
     if (this.state.openNum > this.state.computedCourses.length) {
@@ -106,10 +108,11 @@ class Subject extends Component {
     })
     setTimeout(() => {
       chrome.runtime.sendMessage({ payload: JSON.stringify({ action: 'walk_tab' }) })
-    }, 1000)
+    }, 5000)
   }
 
   render () {
+    const hintText = '请根据电脑配置和网速量力而行！为加载视频，批量打开课程5秒后会自动切换浏览器Tab页，请勿操作浏览器窗口！'
     return (
       <>
         {
@@ -177,31 +180,32 @@ class Subject extends Component {
                         <Col span={15}>
                           {
                             this.state.computedCourses.length >= 1 &&
-                            <div className='auto-open'>
-                              <Input size="small" type="number"
-                                addonBefore="同时学" addonAfter="个课程"
-                                onChange={e => {
-                                  if (e.target.value > 0) {
-                                    if (e.target.value > this.state.computedCourses.length) {
-                                      this.setState({ openNum: this.state.computedCourses.length })
+                            <Tooltip title={hintText}>
+                              <div className='auto-open'>
+                                <Input size="small" type="number"
+                                  addonBefore="同时学" addonAfter="个课程"
+                                  onChange={e => {
+                                    if (e.target.value > 0) {
+                                      if (e.target.value > this.state.computedCourses.length) {
+                                        this.setState({ openNum: this.state.computedCourses.length })
+                                      } else {
+                                        this.setState({ openNum: parseInt(e.target.value) })
+                                      }
                                     } else {
-                                      this.setState({ openNum: parseInt(e.target.value) })
+                                      this.setState({ openNum: null })
                                     }
-                                  } else {
-                                    this.setState({ openNum: null })
+                                  }}
+                                  value={this.state.openNum} />
+                                <span
+                                  className="openButton"
+                                  onClick={() => this.openMultipleCourse()
                                   }
-                                }}
-                                value={this.state.openNum} />
-                              <span
-                                className="openButton"
-                                onClick={() => this.openMultipleCourse()
-                                }
-                              >
-                                开始！
-                              </span>
-                            </div>
+                                >
+                                  开始！
+                                </span>
+                              </div>
+                            </Tooltip>
                           }
-
                         </Col>
                       </Row>
                     </div>
